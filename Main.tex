@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage[pdfusetitle]{hyperref}
+
+% Header Imports
+\graphicspath{{img/}}
+\bibliographystyle{alpha}
+\input{definitions}
+
+% Meta Data Definitions
+\newcommand{\authortext}{Simon Gehring}
+\newcommand{\street}{Am Jesuitenhof}
+\newcommand{\email}{simon.gehring@fkie.fraunhofer.de}
+\newcommand{\housenumber}{3}
+\newcommand{\postal}{53117}
+\newcommand{\city}{Bonn}
+\newcommand{\mn}{2553262}
+
+\newcommand{\doctype}{Master Thesis}
+\newcommand{\titletext}{UIMA, Docker und Kafka}
+\newcommand{\subtitletext}{Buzzwords oder doch interessant?}
+\newcommand{\field}{Computer Science}
+\newcommand{\organization}{Rheinische Friedrich-Wilhelms-Universität Bonn}
+\newcommand{\cooperation}{Fraunhofer-Institut für Kommunikation, Informationsverarbeitung und Ergonomie}
+
+
+% Meta Data Compiling
+\title{\titletext}
+\author{\authortext}
+\date{\today}
+\newcommand{\address}{\street{} \housenumber{}\linebreak
+\postal{} \city{}}
+
+% Document Start
+\begin{document}
+\input{title}
+\tableofcontents
+
+
+% Blind Text
+\input{blindtext}
+
+
+
+% ... Bibliography maybe?
+\bibliography{bibliography}
+
+% Eidesstattliche Erklärung des Selbstständigen Verfassens
+\input{declaration}
+  
+\end{document}
