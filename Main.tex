@@ -11,11 +11,18 @@
 \usepackage{graphicx}
 \usepackage{blindtext}
 \usepackage[pdfusetitle]{hyperref}
+\usepackage[acronyms,nohypertypes={acronym,main},nopostdot]{glossaries}
+
+% Glossary Styling
+\setacronymstyle{short-long}
+\setglossarystyle{altlist}
+\makenoidxglossaries
 
 % Header Imports
 \graphicspath{{img/}}
 \bibliographystyle{alpha}
 \input{definitions}
+\input{glossary}
 
 % Meta Data Definitions
 \newcommand{\authortext}{Simon Gehring}
@@ -27,7 +34,7 @@
 \newcommand{\mn}{2553262}
 
 \newcommand{\doctype}{Master Thesis}
-\newcommand{\titletext}{UIMA, Docker und Kafka}
+\newcommand{\titletext}{UIMA, Docker and Kafka}
 \newcommand{\subtitletext}{Buzzwords oder doch interessant?}
 \newcommand{\field}{Computer Science}
 \newcommand{\organization}{Rheinische Friedrich-Wilhelms-Universität Bonn}
@@ -46,13 +53,15 @@
 \input{title}
 \tableofcontents
 
-
 % Blind Text
 \input{blindtext}
 
-
-
-% ... Bibliography maybe?
+\uima{} ist toll!
+\dkpro{} ist wundervoll!
+\cite{stallman99:telepolis}
+% Glossary obv.
+\printnoidxglossary[sort=letter]
+% Bibliography obv.
 \bibliography{bibliography}
 
 % Eidesstattliche Erklärung des Selbstständigen Verfassens
