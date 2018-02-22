@@ -6,13 +6,20 @@
 % #4: Description (UIMA are software systems that...)
 \newcommand{\newacr}[4]{\newglossaryentry{glos:#1}{name={#3},description={#4}} \newacronym{acr:#1}{#2}{\gls{glos:#1}} }
 
-\newacr{uima}{UIMA}{Unstructured Information Management Applications}{UIMA are software systems that analyze large volumes of unstructured information in order to discover knowledge that is relevant to an end user. An example UIM application might ingest plain text and identify entities, such as persons, places, organizations; or relations, such as works-for or located-at.}
+% TODO: Eigene Texte. Die sind bisher alle gestohlen :O
 
+\newacr{nlp}{NLP}{Natural Language Processing}{Natural-language processing (NLP) is a field of computer science, artificial intelligence concerned with the interactions between computers and human (natural) languages, and, in particular, concerned with programming computers to fruitfully process large natural language data. Challenges in natural-language processing frequently involve speech recognition, natural-language understanding, and natural-language generation.}
+\newcommand{\nlp}{\gls{acr:nlp}}
+
+\newacr{uima}{UIMA}{Unstructured Information Management Applications}{UIMA are software systems that analyze large volumes of unstructured information in order to discover knowledge that is relevant to an end user. An example UIM application might ingest plain text and identify entities, such as persons, places, organizations; or relations, such as works-for or located-at.}
 \newcommand{\uima}{\gls{acr:uima}}
 
-\newglossaryentry{glos:dkpro}{%
-    name=DKPro,
-    description={DKPro is a community of projects focussing on re-usable Natural Language Processing software}
-    }
+\newacr{qa}{QA}{Question Answering}{Question answering (QA) is a computer science discipline within the fields of information retrieval and \nlp{}, which is concerned with building systems that automatically answer questions posed by humans in a natural language.}
+\newcommand{\qa}{\gls{acr:qa}}
 
-\newcommand{\dkpro}{\gls{glos:dkpro}}
+\newacr{dkpro}{DKPro}{Darmstadt Knowledge Processing Software Repository}{A collection of software components for natural language processing (NLP) based on the Apache UIMA framework.}
+\newcommand{\dkpro}{\gls{acr:dkpro}}
+
+\newacr{cauti}{CAUTI}{Catheter-associated Urinary Tract Infection}{A urinary tract infection (UTI) is an infection involving any part of the urinary system, including urethra, bladder, ureters, and kidney. UTIs are the most common type of healthcare-associated infection reported to the National Healthcare Safety Network (NHSN).  Among UTIs acquired in the hospital, approximately 75\% are associated with a urinary catheter, which is a tube inserted into the bladder through the urethra to drain urine.  Between 15-25\% of hospitalized patients receive urinary catheters during their hospital stay.  The most important risk factor for developing a catheter-associated UTI (CAUTI) is prolonged use of the urinary catheter.  Therefore, catheters should only be used for appropriate indications and should be removed as soon as they are no longer needed.}
+\newcommand{\cauti}{\gls{acr:cauti}}
+\newcommand{\cautis}{\glspl{acr:cauti}}
