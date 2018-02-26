@@ -4,7 +4,12 @@ Natural language is part of everyone's everyday life and is most commonly used t
 
 Many opportunities arise from this amount of digital data, specifically in the field of machine learning. In 2011, IBM's \qa{} system ``Watson'' famously outmatched professional players in the quiz show ``Jeopardy!'' \cite{ferrucci2012introduction,epstein2012making}. Kudesia et al. proposed 2012 an algorithm to detect so called \cautis{}, common hospital-acquired infections, by utilizing a \nlp{} analysis on the medical records of patients \cite{kudesia2012natural}.
 
-https://www.sciencedirect.com/science/article/pii/S1532046415000362
+Apache \uima{} is one of few general approaches to implement \nlp{} solutions. With a very modular architecture, \uima{} is a popular tool that can easily be applied to a majority of \nlp{} problems. A large part of the popularity of \uima{} stems from the large \dkpro{} collection of components, containing hundreds of analysis modules and precomputed language models \cite{eckartdecastilho-gurevych:2014:OIAF4HLT}, which are easily imported into existing Java projects by the build automation tool Apache Maven \cite{dkpro}.
+
+A common problem with \uima{} in non-academic environments is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. \uima{} itself provides two distinct interfaces to analyse larger collections of unstructured data, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
+
+In this thesis, we will evaluate different means of scaling \uima{}, using modern technologies like \docker{}, a container virtualization solution, \spark{}, a cluster computing framework, and \kafka{}, an information stream processing software. We will compare said implementations with the native \uimaas{} and \cpe{} approach in terms of processor and memory efficiency, ease of implementation and maintainability.
+
 
 \section{Motivation}
 
@@ -31,7 +36,7 @@ https://www.sciencedirect.com/science/article/pii/S1532046415000362
 
 \subsection{Something else that warrants another subsection}
 
-\subsection{Maybe something not UIMA related?}
+\subsection{GATE?}
 
 
 \section{Outline}
