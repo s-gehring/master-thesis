@@ -15,6 +15,7 @@
 \usepackage{csquotes}					% Quoting. Probably only used in the glossary.
 \usepackage[bottom]{footmisc}			% Place footnotes at the bottom of the page.
 \usepackage[strings]{underscore}			% Bibtex is confused by underscores in URLs. Yeah... underscores.
+\usepackage{censor}
 
 
 % Glossary Styling
@@ -38,14 +39,14 @@
 \newcommand{\mn}{2553262}
 
 \newcommand{\doctype}{Master Thesis}
-\newcommand{\titletext}{UIMA, Docker and Kafka}
-\newcommand{\subtitletext}{Buzzwords oder doch interessant?}
+\newcommand{\titletext}{Scaling UIMA}
+\newcommand{\subtitletext}{} % Don't know anything interesting.
 \newcommand{\field}{Computer Science}
 \newcommand{\organization}{Rheinische Friedrich-Wilhelms-Universität Bonn}
 \newcommand{\cooperation}{Fraunhofer-Institut für Kommunikation, Informationsverarbeitung und Ergonomie}
 
 \newcommand{\supervisorOne}{Prof.~Dr.~Heiko \textsc{Röglin}}
-\newcommand{\supervisorTwo}{Daniel \textsc{Töws}}
+\newcommand{\supervisorTwo}{\censor{Irgendwer ;_;}}
 
 
 % Meta Data Compiling
