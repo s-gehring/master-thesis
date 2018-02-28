@@ -3,27 +3,57 @@
 % Packages
 \usepackage[utf8]{inputenc}		
 \usepackage[T1]{fontenc}			
-\usepackage[english]{babel}				% Speling Errors? Me? Never!
-\usepackage{amsmath}						% For all your math needs...
-\usepackage{amsfonts}					% ...and beyond...
-\usepackage{amssymb}						% ...and even further.
-\usepackage{makeidx}						% We have a number of indexes.
-\usepackage{url}							% URLs in bib
-\usepackage{graphicx}					% For pictures and stuff.
-\usepackage[pdfusetitle]{hyperref}		% Not really necessary.
+\usepackage[english]{babel}						% Speling Errors? Me? Never!
+
+
+\usepackage{amsmath}							% For all your math needs...
+\usepackage{amsfonts}							% ...and beyond...
+\usepackage{amssymb}							% ...and even further.
+\usepackage{makeidx}							% We have a number of indexes.
+\usepackage{url}								% URLs in bib
+\usepackage{graphicx}							% For pictures and stuff.
+\usepackage[pdfusetitle]{hyperref}				% Not really necessary.
 \usepackage[acronyms,nohypertypes={acronym,main},nopostdot]{glossaries} % For the glossary.
-\usepackage{csquotes}					% Quoting. Probably only used in the glossary.
-\usepackage[bottom,perpage,multiple]{footmisc}			% Place footnotes at the bottom of the page, restart counting each page and merge multiple footnotes.
-\usepackage[strings]{underscore}			% Bibtex is confused by underscores in URLs. Yeah... underscores.
-\usepackage{censor}
+\usepackage[bottom,perpage,multiple]{footmisc}	% Place footnotes at the bottom of the page, restart counting each page and merge multiple footnotes.
+\usepackage{csquotes}							% Quoting. Probably only used in the glossary.
+\usepackage[strings]{underscore}				% Bibtex is confused by underscores in URLs. Yeah... underscores.
+\usepackage{censor}								% For ████ing that ████ed piece of ████. Actually only for development.
+\usepackage{listings}							% Code Snippets.
+\usepackage{color}								% Colorful code snippets :3
+\usepackage[singlelinecheck=off]{caption}
 
 
+% Dev Only
+\usepackage{marginnote}							% For development comments.
+\renewcommand*{\marginfont}{\tiny}
+\usepackage[marginparsep=3mm, marginparwidth=2cm]{geometry}
 
 
 % Glossary Styling
 \setacronymstyle{short-long}
 \setglossarystyle{altlist}
 \makenoidxglossaries
+
+% Listings Styling
+\definecolor{grey}{rgb}{0.8,0.8,0.8}
+\lstset{
+	tabsize=2,
+	rulecolor=\color{black},
+	numberstyle=\color{grey},
+	numbersep=10pt,
+	framesep=5pt,
+	xleftmargin=5pt,
+	xrightmargin=5pt,
+	numbers=left,
+	keepspaces=true,
+	frame=shadowbox,
+	captionpos=b,
+	breaklines=false,
+	basicstyle=\footnotesize
+}
+\lstdefinestyle{YAML}{
+	morekeywords={FROM,COPY,ENTRYPOINT,ADD,CMD,HEALTHCHECK}
+	}
 
 % Header Imports
 \graphicspath{{img/}}
