@@ -1,3 +1,5 @@
+% !TeX root = ../Main.tex
+
 % Glossary
 
 % #1: Id (uima)
@@ -29,6 +31,18 @@
 
 \newglossaryentry{glos:docker}{name={Docker},description={Docker is a virtualization solution based on containers. By using containers instead of fully fledged virtual machines Docker tries to reduce the system overhead per running application \cite{docker}.}}
 \newcommand{\docker}{\gls{glos:docker}}
+
+
+\newacr{ae}{AE}{Analysis Engine}{An Analysis Engine is a component of an \uima{} \nlp{} pipeline. As such it analyses given documents and enriches it with inferred information. An Analysis Engine may contain other Analysis Engines.}
+\newcommand{\anen}{\gls{acr:ae}}
+\newcommand{\anens}{\glspl{acr:ae}}
+
+\newacr{cas}{CAS}{Common Analysis System}{The Common Analysis System is a type of object in the \uima{} framework. It contains the subject of analysis, the analysis result and a corresponding type system.}
+\newcommand{\cas}{\gls{acr:cas}}
+
+
+\newacr{sofa}{SofA}{Subject of Analysis}{The Subject of Analysis is the document that gets analyzed by a given \uima{} application. It is contained in its corresponding \cas{}.}
+\newcommand{\sofa}{\gls{acr:sofa}}
 
 % TODO: Eigene Texte. Die ab hier sind alle gestohlen :O
 
