@@ -1,0 +1,20 @@
+% !TeX root = ../Main.tex
+
+\subsection{Docker}
+\marginnote{Source?}\docker{} is a software to create and run applications in virtual environments, without the need to setup a complete virtual operating system for each application. Based on Cgroups and namespaces, \docker{} runs applications in a containerized environment.
+To create a containerized application, a special markup file, called a Dockerfile has to be written by the programmer. The Dockerfile defines exactly how the applications environment needs to look like.
+
+\marginnote{TODO: Besseres Dockerfile finden.}
+
+
+\begin{lstlisting}[style=YAML,caption=hiho]
+FROM	stain/jena-fuseki:latest
+
+COPY ./fuseki /fuseki
+
+COPY ./docker-entrypoint.sh /docker-entrypoint2.sh
+COPY ./ReAn.ttl /staging/ReAn.ttl
+COPY ./inferred.ttl /staging/inferred.ttl
+
+ENTRYPOINT ["/docker-entrypoint2.sh"]
+\end{lstlisting}
