@@ -6,7 +6,7 @@ Many opportunities arise from this amount of digital data, specifically in the f
 
 Apache \uima{} is one of few general approaches to implement \nlp{} solutions. With a very modular architecture, \uima{} is a popular tool that can easily be applied to a majority of \nlp{} problems. A large part of the popularity of \uima{} stems from the large \dkpro{} collection of components, containing hundreds of analysis modules and precomputed language models \cite{eckartdecastilho-gurevych:2014:OIAF4HLT}, which are easily imported into existing Java projects with the build automation tool Apache Maven \cite{dkpro}.
 
-A common problem with \uima{} in non-academic environments is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. \uima{} itself provides two distinct interfaces to analyse larger collections of unstructured data, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
+A common problem with \uima{} in non-academic environments is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. \uima{} itself provides two distinct interfaces to analyze larger collections of unstructured data, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
 
 In this thesis, we will evaluate different means of scaling \uima{}, using modern technologies like \docker{}, a container virtualization solution, \spark{}, a cluster computing framework, and \kafka{}, an information stream processing software. We will compare said implementations with the native \uimaas{} and \cpe{} approach in terms of processor and memory efficiency, ease of implementation and maintainability.
 
@@ -17,8 +17,9 @@ In this thesis, we will evaluate different means of scaling \uima{}, using moder
 
 \section{Problem}
 \subsection{Scaling UIMA}
-\subsubsection{UIMA-AS}
 \subsubsection{UIMA-CPM}
+\subsubsection{UIMA-AS}
+\subsubsection{UIMA-DUCC}
 \subsection{Implementation Requirements}
 
 
@@ -29,6 +30,5 @@ In this thesis, we will evaluate different means of scaling \uima{}, using moder
 \subsection{Something else that warrants another subsection}
 
 \subsection{GATE?}
-
 
 \section{Outline}
