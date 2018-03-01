@@ -2,19 +2,21 @@
 
 \subsection{Docker}
 \marginnote{Source?}\docker{} is a software to create and run applications in virtual environments, without the need to setup a complete virtual operating system for each application. Based on Cgroups and namespaces, \docker{} runs applications in a containerized environment.
-To create a containerized application, a special markup file, called a Dockerfile has to be written by the programmer. The Dockerfile defines exactly how the applications environment needs to look like.
+To create a containerized application, a special markup file, called a Dockerfile has to be written by the programmer. The Dockerfile defines exactly how the applications' environment needs to look like. Listing \ref{dockerfile} shows how such a Dockerfile typically looks like. Based on an Ubuntu image, it installs Java via apt-get. Afterwards it copies the file {\em{} application.jar} into the root of the image and tells Docker to execute it via \lstinline[]|java -jar /app.jar -Xmx4G -Xms4G|. Having such a Dockerfile ensures reproducibility of the constructed images. After building said Dockerfile, an image is created.\marginnote{source für Registries? Öffentliches Docker-Registry?} This image can be serialized into a file but is usually uploaded to Docker repositories, called registries. 
 
-\marginnote{TODO: Besseres Dockerfile finden.}
+\begin{minipage}{\textwidth}
+	
+\begin{lstlisting}[style=YAML,caption=A sample Dockerfile used for creating a simple Ubuntu based image to start a Java application.,label=dockerfile]
+FROM	ubuntu
 
+RUN		apt(*@-@*)get update
+RUN		apt(*@-@*)get install openjdk(*@-@*)9(*@-@*)jre
 
-\begin{lstlisting}[style=YAML,caption=hiho]
-FROM	stain/jena-fuseki:latest
+COPY	./application.jar /application.jar
 
-COPY ./fuseki /fuseki
-
-COPY ./docker-entrypoint.sh /docker-entrypoint2.sh
-COPY ./ReAn.ttl /staging/ReAn.ttl
-COPY ./inferred.ttl /staging/inferred.ttl
-
-ENTRYPOINT ["/docker-entrypoint2.sh"]
+ENTRYPOINT ["java", "(*@-@*)jar /app.jar", "(*@-@*)Xmx4G", "(*@-@*)Xms4G"]
 \end{lstlisting}
+
+\end{minipage}
+
+\marginnote{SOUUUURCE!!}If published through a registry, Docker automatically downloads images on demand. Since the application as well as the whole environment necessary to run it lie within the image, it can be executed. Docker creates a container, a virtual environment based on the given image, \marginnote{Zweimal within? Thesaurus lässt grüßen.}and runs the application within. Containers are usually not aware of each other, thus the same application can be started multiple times, just by starting more containers. \marginnote{An den Haaren herbeigezogen.}This modular view on containers will play a fundamental role on scaling.
