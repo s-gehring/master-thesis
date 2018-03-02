@@ -1,7 +1,7 @@
 % !TeX root = ../Main.tex
 
 \section{\docker{}}
-\marginnote{Source?}\docker{} is a software to create and run applications in virtual environments, without the need to setup a complete virtual operating system for each application. Based on Cgroups and namespaces, \docker{} runs applications in a containerized environment.
+\docker{} is a software to create and run applications in containerized, \marginnote{Source?}virtual environments, without the need to setup a complete virtual operating system for each application. 
 To create a containerized application, a special markup file, called a Dockerfile has to be written by the programmer. The Dockerfile defines exactly how the applications' environment needs to look like. Listing \ref{dockerfile} shows how such a Dockerfile typically looks like. Based on an Ubuntu image, it installs Java via apt-get. Afterwards it copies the file {\em{} application.jar} into the root of the image and tells \docker{} to execute it via \lstinline[]|java -jar /app.jar -Xmx4G -Xms4G|. Having such a Dockerfile ensures reproducibility of the constructed images. After building said Dockerfile, an image is created.\marginnote{source für Registries? Öffentliches \docker{}-Registry?} This image can be serialized into a file but is usually uploaded to \docker{} repositories, called registries. 
 
 \begin{minipage}{\textwidth}
