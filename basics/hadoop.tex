@@ -1,0 +1,10 @@
+% !TeX root = ../Main.tex
+
+\section{Hadoop}
+\marginnote{Sauce!}\hadoop{} is an open-source framework for computation and storage, distributed over an \marginnote{almost?}(almost) arbitrary number of machines. It contains the \hdfs{}, a distributed file system built for high throughput and reliability, and specifically designed to run on commodity hardware. These properties allow for large clusters of relatively cheap hardware.
+
+\hadoop{} also provides an API for distributed computing, named Hadoop MapReduce, based on the MapReduce algorithm by Dean and Ghemawat in \cite{dean2008mapreduce}. In this algorithm the underlying transformation of data is abstracted into two general steps, Map and Reduce. With $K,L,V,W$ being sets the Map function implements 
+\[\mathtt{Map}: K\times{}V\to{}(L\times{}W)^*\]
+Thus it maps a key-value pair to a list of key-value pairs of arbitrary length \cite{wiki:mapreduce}. The resulting list of key-value pairs acts as intermediate values. The Reduce function aggregates those intermediate values with
+\[\mathtt{Reduce}: L\times{}W^*\to{}\] huh...
+The programmer in question needs to understand this concept and divide their code into those two steps.
