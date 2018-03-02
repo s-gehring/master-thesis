@@ -5,7 +5,6 @@
 \usepackage[T1]{fontenc}			
 \usepackage[english]{babel}						% Speling Errors? Me? Never!
 
-
 \usepackage{amsmath}							% For all your math needs...
 \usepackage{amsfonts}							% ...and beyond...
 \usepackage{amssymb}							% ...and even further.
@@ -22,6 +21,7 @@
 \usepackage{color}								% Colorful code snippets :3
 \usepackage[singlelinecheck=off]{caption}		% Make captions left aligned even if single line.
 \usepackage{tocbibind}							% Include ToC in ToC.
+
 
 
 % Dev Only
@@ -83,7 +83,7 @@
 \newcommand{\cooperation}{Fraunhofer-Institut für Kommunikation, Informationsverarbeitung und Ergonomie}
 
 \newcommand{\supervisorOne}{Prof.~Dr.~Heiko \textsc{Röglin}}
-\newcommand{\supervisorTwo}{\censor{Dr.~Timm \textsc{Heuss}}}
+\newcommand{\supervisorTwo}{Dr.~Timm \textsc{Heuss}}
 
 
 % Meta Data Compiling
@@ -103,6 +103,7 @@
 \pagenumbering{arabic}
 % Content
 \input{introduction/main} 		% Einführung, Motivation, Related Work
+\input{basics/main}
 \input{implementation/main}		% Hauptteil, Lösungen von Problemen, Implementierungsdetail(?)
 \input{evaluation/main}			% Evaluation (Geschwindigkeit, Speicher etc.)
 \input{summary/main}			% Zusammenfassung / Fazit
