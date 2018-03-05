@@ -101,6 +101,36 @@
 \newpage{}
 \setcounter{page}{1}
 \pagenumbering{arabic}
+
+% Precontent
+\begin{abstract}
+Natural language is most commonly used to transmit information human-to-human. While most of this interaction takes place orally or written on paper, the digital revolution and the rise of social media increased the amount of digitally stored natural language tremendously. Gantz and Reinsel predicted 2012 that the amount of digital data stored globally will double about every two years until at least the year 2020 \cite{gantz2012digital}.
+
+Many opportunities arise from this amount of digital data, specifically in the field of machine learning. In 2011, IBM's \qa{} system ``Watson'' famously outmatched professional players in the quiz show ``Jeopardy!'' \cite{ferrucci2012introduction,epstein2012making}. Kudesia et al. proposed 2012 an algorithm to detect so called CAUTIs\footnote{Catheter-associated Urinary Tract Infections}, common hospital-acquired infections, by utilizing a \nlp{} analysis with precomputed language models on the medical records of patients \cite{kudesia2012natural}.
+
+Natural language unfortunately tends to be unstructured and hardly machine readable. Even a seemingly easy task, like separating a sentence into words is still an ongoing research topic \cite{pak2018text}. Apache \uima{} is one of few general approaches to implement \nlp{} solutions. With a very modular architecture, \uima{} is a popular tool that can easily be applied to a majority of \nlp{} problems. A large part of the popularity of \uima{} stems from the large \dkpro{} collection of components, containing hundreds of analysis modules and precomputed language models \cite{eckartdecastilho-gurevych:2014:OIAF4HLT}, which are easily imported into existing Java projects with the build automation tool Apache Maven \cite{dkpro}.
+
+A common problem with \uima{} in non-academic environments is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. \uima{} itself provides two distinct interfaces to analyze larger collections of unstructured data, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
+
+In this thesis, we will evaluate different means of scaling \uima{}, using modern technologies like \docker{}, a container virtualization solution, \spark{}, a cluster computing framework, and \kafka{}, an information stream processing software. We will compare said implementations with the native \uimaas{} and \cpe{} approach in terms of processor and memory efficiency, ease of implementation and maintainability. The evaluation will be based on a specific scenario, however it will be easily configurable by exchanging very few lines of code. 
+
+The following decisions are still to be made:
+\begin{itemize}
+	\item On what level of abstraction will be parallelized? (Inter-Annotator, Inter-Pipeline, Inter-JVM, ...)
+	\item What methods of parallelization will be used? (Spark? Native Java Threads? UIMA-AS? Services?)
+	\item What application (and implied data set) is going to be parallelized?
+	\item What metrics are we trying to optimize?
+	\begin{itemize}
+		\item CPU Workload (Does the system use all the available processing power?)
+		\item RAM Usage (How much RAM does the system use? Does it swap?)
+		\item Throughput (How many documents per second are processed?)
+		\item Maintainability (Are infrastructure changes or code changes easy to implement?)
+		\item Extensibility (How easy is it to add more processing power?)
+		\item Implementability (How simple is the implementation?)
+	\end{itemize}
+\end{itemize}
+\end{abstract}
+
 % Content
 \input{introduction/main} 		% Einführung, Motivation, Related Work
 \input{basics/main}
