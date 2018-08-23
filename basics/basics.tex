@@ -1,0 +1,25 @@
+% !TeX root = ../Main.tex
+
+\chapter{Basics}
+
+Es gibt haufenweise Konzepte, die ich für das Framework, allerdings noch eher für das Testen und Benchmarken verwendet habe. Diese muss ich natürlich alle (oder zumindest die meisten) vorstellen.
+
+Ganz oben dabei ist natürlich UIMA, wobei das eigentlich schon extrem in der Introduction benutzt wird. Ich mag es nicht jetzt erst auf UIMA einzugehen. Aber was will man machen? Irgendeine Struktur braucht man ja.
+
+Danach kommt Spark. Da ist auf dieser Seite eher \"Benutzer\" als Developer bin, werde ich vermutlich nicht besonders tief in die Materie eingehen. Ich denke ich werde nicht bis zum Map-Reduce kommen. Und wenn dann werde ich das nur anschneiden und auf Quellen verweisen. Die internen Spark-Konzepte sind nunmal nicht wirklich wichtig für die Implementierung.
+
+Selbstverständlich kann ich noch weiter ausholen und erst ein wenig über Java, Maven etc. reden, aber ich glaube das ist etwas overkill. Wer meine Arbeit liest, sollte zumindest Java kennen.
+
+Kommen wir zu dem Versuchsaufbau, kommt natürlich Docker ins Spiel. Docker spielt natürlich im Development (schnelles Deployment, etc.) eine Rolle, hat aber bei mir außerdem die Rolle des VM-Ersatzes übernommen. Wie wichtig Docker für den gesamten Versuch war, lässt sich leicht in den Docker- und Composefiles lesen. Diese garantieren darüber hinaus natürlich Vergleichbarkeit.
+
+Trotzdem sind die underlying Konzepte des Docker-Universums nicht allzu wichtig für das Framework an sich. Deployed wird es (da es sich ja nur um eine library handelt und nicht standalone arbeitet) sowieso nur über Maven. Ich plane daher auch eine mögliche Docker-Section nicht allzu groß zu gestalten.
+
+Ich habe es zwar nicht benutzt, aber eine kleine Einführung in HDFS könnte nützlich sein. Ich werde häufiger (im Kontext von BigData) anmerken, dass Daten vermutlich von einem verteiltem Dateisystem, etwa einem HDFS kommen und dahin geschrieben werden.
+
+%In this chapter, we will cover the basics for the necessary technologies used throughout the evaluation. All of these are concrete implementations of more general concepts and may be exchanged for similar products. However, the following products were chosen, mainly because they are Open Source\footurl{https://svn.apache.org/viewvc/uima/}{2018-02-27}\footurl{https://github.com/docker}{2018-02-27}\footurl{https://github.com/apache/hadoop}{2018-02-27}\footurl{https://github.com/apache/spark}{2018-02-27}\footurl{https://github.com/apache/kafka}{2018-02-27} but also because of their popularity and relevance in the industry.
+
+% \input{basics/uima}
+% \input{basics/docker}
+% \input{basics/hadoop}
+% \section{Spark}
+% \section{Kafka}
