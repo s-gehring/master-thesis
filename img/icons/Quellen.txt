@@ -1,0 +1,3 @@
+spark.svg	23.08.2018	https://commons.wikimedia.org/wiki/File:Apache_Spark_logo.svg
+uima.svg	23.08.2018	http://lucene.apache.org/solr/assets/images/
+hadoop.svg	23.08.2018	https://de.wikipedia.org/wiki/Datei:Hadoop_logo.svg
