@@ -1,7 +1,22 @@
 \chapter{Evaluation}
-Das kommt natürlich ganz auf die gesammelten Daten an, die ich noch genauer analysieren muss. Zum Zeitpunkt an dem ich diesen Text hier schreibe, hab ich ein wenig bammel, dass die Analysedaten teilweise unbrauchbar sind. Das wär natürlich doof. 
+Die Struktur hier sollte der Section Implementation Requirements ähneln.
+
+Außerdem müssen wir noch begründen warum wir jetzt Framework gegen Single Threaded und UIMA-AS laufen lassen.
 
 Was wir definitiv vergleichen können ist Extensibility und Maintainability, also weiche Metriken. Memory Consumption hab ich nicht mit geloggt, das empfand ich als zuviel Aufwand für zuwenig return. Hintergrund ist, dass sowohl UIMA-AS, als auch Spark nur kleinen Overhead haben. Wir reden hier von <1GB. Jede halbwegs erwachsene Pipeline, mit mindestens einem oder zwei Modellen übertrifft das. Somit bin ich grundsätzlich einfach davon ausgegangen, dass Speicher "genug" da ist, also nichts geswappt wird (und offensichtlich nichts in den OOM-Killer läuft). Ich denke das ist sinnvoll so. Hat man einen Rechner, auf dessen RAM die Pipeline, inklusive aller Modelle, passt, dann passt da auch noch Spark/UIMA-AS drauf. Passt die Pipeline nicht, hat man sowieso Pech.
+
+\section{Setup}
+
+Auf jeden Fall den gesamten Versuchsaufbau beschreiben, inkl. allem Docker-Gedöhns. 
+Bilder:
+\begin{itemize}
+	\item Versuchsaufbau UIMA-AS (evtl. inkl. Dockercontainern? Oder eher davon wegabstrahiert?)
+	\item Versuchsaufbau Spark (s.o.)
+	\item Framework in HDFS-Umgebung
+	\item Single-Threaded in HDFS-Umgebung
+	\item UIMA-AS in HDFS-Umgebung (hey, hier kann mein Framework punkten, da mach ich ein Bild zu :D)
+	
+\end{itemize}
 
 \section{Computation Speed}
 

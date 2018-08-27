@@ -2,19 +2,51 @@
 
 \chapter{Basics}
 
+
 Es gibt haufenweise Konzepte, die ich für das Framework, allerdings noch eher für das Testen und Benchmarken verwendet habe. Diese muss ich natürlich alle (oder zumindest die meisten) vorstellen.
 
 Ganz oben dabei ist natürlich UIMA, wobei das eigentlich schon extrem in der Introduction benutzt wird. Ich mag es nicht jetzt erst auf UIMA einzugehen. Aber was will man machen? Irgendeine Struktur braucht man ja.
 
 Danach kommt Spark. Da ist auf dieser Seite eher \"Benutzer\" als Developer bin, werde ich vermutlich nicht besonders tief in die Materie eingehen. Ich denke ich werde nicht bis zum Map-Reduce kommen. Und wenn dann werde ich das nur anschneiden und auf Quellen verweisen. Die internen Spark-Konzepte sind nunmal nicht wirklich wichtig für die Implementierung.
 
-Selbstverständlich kann ich noch weiter ausholen und erst ein wenig über Java, Maven etc. reden, aber ich glaube das ist etwas overkill. Wer meine Arbeit liest, sollte zumindest Java kennen.
-
 Kommen wir zu dem Versuchsaufbau, kommt natürlich Docker ins Spiel. Docker spielt natürlich im Development (schnelles Deployment, etc.) eine Rolle, hat aber bei mir außerdem die Rolle des VM-Ersatzes übernommen. Wie wichtig Docker für den gesamten Versuch war, lässt sich leicht in den Docker- und Composefiles lesen. Diese garantieren darüber hinaus natürlich Vergleichbarkeit.
 
 Trotzdem sind die underlying Konzepte des Docker-Universums nicht allzu wichtig für das Framework an sich. Deployed wird es (da es sich ja nur um eine library handelt und nicht standalone arbeitet) sowieso nur über Maven. Ich plane daher auch eine mögliche Docker-Section nicht allzu groß zu gestalten.
 
 Ich habe es zwar nicht benutzt, aber eine kleine Einführung in HDFS könnte nützlich sein. Ich werde häufiger (im Kontext von BigData) anmerken, dass Daten vermutlich von einem verteiltem Dateisystem, etwa einem HDFS kommen und dahin geschrieben werden.
+
+\section{UIMA-Family}
+
+Unbedingt bilder hinzufügen und establishen was eine Pipeline ist!!1!
+
+\subsection{Apache UIMA}
+
+
+\subsection{UIMAfit}
+\subsection{UIMA-CPE}
+UIMA CPE ist der Vorgänger von UIMA-AS und basiert im Grunde darauf, dem User vollständige Macht zu geben um die Skalierung zu bewerkstelligen. Das geht natürlich vollkommen nach hinten los, da Dinge wie Cas Initializers nicht trivial zu konfigurieren sind. Außerdem musste sich der User selbstständig um Dinge wie reconfigure() und typeSystemInit() kümmern. 
+Natürlich basiert CPE auch auf XML-Deskriptoren, für die kein UIMAfit/Leo existiert.
+
+\subsection{UIMA-AS}
+Das bisherige non+ultra. Man deployed pipelines (oder einzelne engines) als Services, die sich am broker registrieren. Anfragen werden an den Broker geschickt, der sie dann weiter sendet. Je nach Broker-Implementierung kann man hier sehr schön resilience zu bauen. Es gibt hier ein paar Dinge zu beachten, was thread-safety angeht. Außerdem ist fraglich ob UIMA-AS tatsächlich uneingeschränkt skalierbar ist, da der CollectionReader möglicherweise einen bottleneck darstellt. Problematisch ist in jedem Fall die Tatsache, dass das gesamte CAS wieder zurück geschickt wird. Das ist möglicherweise gar nicht gewollt, da in der Pipeline bereits consumer bereit stehen, die Dinge in Datenbanken etc schreiben.
+
+Das ist ein wenig die Verteidigung für mein System, bei dem es absolut grauenvoll ist, wenn man die CAS wieder zurück schickt :D
+
+Hier bietet sich auch ein Schaubild an.
+
+\section{Apache Spark}
+
+
+\marginnote{Ich bin sehr unzufrieden mit der related work in den Basics. Es passt hier absolut nicht rein. Ich werde das vermutlich bald wieder in das erste Kapitel Introduction schieben.}
+\section{Related Work}
+Hier im Grunde alles was es an "Vorarbeiten" bzw. konkurrierende Ansätze gibt.
+
+\subsection{Leo}
+Leo ist für UIMA-AS was UIMAfit für UIMA ist. Leider leidet Leo unter einer sehr schwachen und verletzlichen Programmierung. Dies zeigen zum Einen die Inkompabilitäten zu UIMAfit, zum Anderen aber auch statische Code Analyse. Alles in allem aber ein brauchbares Tool und mein Go-To, sollte ich UIMA-AS noch einmal aufsetzen.
+
+\subsection{v3NLP}
+v3NLP ist auch ein scaling framework für NLP, was auf UIMA aufbaut. Es wurde damals speziell für cTAKES und MetaMap programmiert.
+
 
 %In this chapter, we will cover the basics for the necessary technologies used throughout the evaluation. All of these are concrete implementations of more general concepts and may be exchanged for similar products. However, the following products were chosen, mainly because they are Open Source\footurl{https://svn.apache.org/viewvc/uima/}{2018-02-27}\footurl{https://github.com/docker}{2018-02-27}\footurl{https://github.com/apache/hadoop}{2018-02-27}\footurl{https://github.com/apache/spark}{2018-02-27}\footurl{https://github.com/apache/kafka}{2018-02-27} but also because of their popularity and relevance in the industry.
 

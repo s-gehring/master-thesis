@@ -1,17 +1,13 @@
 \chapter{Implementation}
 
-Hier bin ich mir auch noch recht unschlüssig. Wichtig ist auf jeden Fall ein Schaubild. Das gilt natürlich für die eigentliche Implementierung des Frameworks, als auch für alle Versuchsaufbauten.
+Erkläre die Entscheidung warum auf Spark gesetzt wurde als Distributionsframework. Das möglicherweise mit Kruchten 4+1 (\url{https://de.wikipedia.org/wiki/4\%2B1_Sichtenmodell})  aufhübschen.
+
+Ich sollte auch ein wenig mit den generischen Ansätzen Compression \& Serialization angeben. War schließlich nicht trivial die scheiße zu entwickeln.
+
+Timm schlägt ein Schichtendiagramm vor, das zeigt wo ich zwischen UIMA und Spark stehe. Klingt gut, aber auch recht kompliziert in der Umsetzung. Ich denke das werde ich als letztes machen.
 
 Ich denke aus diesen Bildern kann sich recht kanonisch eine Gliederung für das Kapitel entwickeln. Hier mal eine Liste von Abbildungen, die ich mir bisher vorstelle
 
-\begin{itemize}
-\item UIMA pipeline (vermutlich schon weit früher, aber spätestens hier sollte klar sein was UIMA eigentlich mit CAS macht)
-\item UIMA-AS schematisch (evtl. schon oben im Introductionkapitel, aber mindestens ne Referenz dahin)
-\item Framework schematisch in Netzwerksicht (Also welchen Weg Dokumente so in meinem FW gehen)
-\item Versuchsaufbau UIMA-AS (evtl. inkl. Dockercontainern? Oder eher davon wegabstrahiert?)
-\item Versuchsaufbau Spark (s.o.)
-\item Framework in HDFS-Umgebung
-\item Single-Threaded in HDFS-Umgebung
-\item UIMA-AS in HDFS-Umgebung (hey, hier kann mein Framework punkten, da mach ich ein Bild zu :D)
+Framework schematisch in Netzwerksicht (Also welchen Weg Dokumente so in meinem FW gehen)
 
-\end{itemize}
+

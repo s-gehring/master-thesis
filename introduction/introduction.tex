@@ -8,27 +8,14 @@
 Idee: NLP benötigt große Daten, was im Grunde BigData ist (Größenordnung Peta oder Exabyte.)
 Muss entsprechend skaliert werden. Das geht einzeln mit verschiedenen NLP Frameworks, aber UIMA
 ist halt UIMA und generisch. Wär also geil wenn das anständig skalierbar ist.
+Daten von Statista finden, eventuell sogar Graphen eventuell sogar Unternehmensdaten(?)
 
-\section{Related Work}
-Hier im Grunde alles was es an "Vorarbeiten" bzw. konkurrierende Ansätze gibt.
+Weiterhin Name-Dropping von Watson. Was ist GATE oder spaCy
 
-\subsection{Watson}
-Watson ist mehr historisch bedingt und zählt eher zu UIMA-AS. Trotzdem interessant, da dort UIMA das erste mal demowürdig skaliert wurde.
+\section{Implementation Requirements}
+Welche Kriterien für die Skalierung werden überprüft und warum ist das sinnvoll?
 
-\subsection{v3NLP}
-v3NLP ist auch ein scaling framework für NLP, was auf UIMA aufbaut. Es wurde damals speziell für cTAKES und MetaMap programmiert.
 
-\subsection{Leo}
-Leo ist für UIMA-AS was UIMAfit für UIMA ist. Leider leidet Leo unter einer sehr schwachen und verletzlichen Programmierung. Dies zeigen zum Einen die Inkompabilitäten zu UIMAfit, zum Anderen aber auch statische Code Analyse. Alles in allem aber ein brauchbares Tool und mein Go-To, sollte ich UIMA-AS noch einmal aufsetzen.
-
-\subsection{UIMA CPE}
-UIMA CPE ist der Vorgänger von UIMA-AS und basiert im Grunde darauf, dem User vollständige Macht zu geben um die Skalierung zu bewerkstelligen. Das geht natürlich vollkommen nach hinten los, da Dinge wie Cas Initializers nicht trivial zu konfigurieren sind. Außerdem musste sich der User selbstständig um Dinge wie reconfigure() und typeSystemInit() kümmern. 
-Natürlich basiert CPE auch auf XML-Deskriptoren, für die kein UIMAfit/Leo existiert.
-
-\subsection{UIMA AS}
-Das bisherige non+ultra. Man deployed pipelines (oder einzelne engines) als Services, die sich am broker registrieren. Anfragen werden an den Broker geschickt, der sie dann weiter sendet. Je nach Broker-Implementierung kann man hier sehr schön resilience zu bauen. Es gibt hier ein paar Dinge zu beachten, was thread-safety angeht. Außerdem ist fraglich ob UIMA-AS tatsächlich uneingeschränkt skalierbar ist, da der CollectionReader möglicherweise einen bottleneck darstellt. Problematisch ist in jedem Fall die Tatsache, dass das gesamte CAS wieder zurück geschickt wird. Das ist möglicherweise gar nicht gewollt, da in der Pipeline bereits consumer bereit stehen, die Dinge in Datenbanken etc schreiben.
-
-Das ist ein wenig die Verteidigung für mein System, bei dem es absolut grauenvoll ist, wenn man die CAS wieder zurück schickt :D
 
 \section{Outline}
 Ich outline hier halt die gesamte restliche Thesis. Im Großen und Ganzen ist das hier nur ein unvollständiges und glorifiziertes Inhaltsverzeichnis.
