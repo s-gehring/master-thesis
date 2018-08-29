@@ -3,19 +3,55 @@
 \chapter{Introduction}
 
 
+Natural language is most commonly used to transmit information human-to-human. While most of this interaction takes place orally or written on paper, the digital revolution and the rise of social media increased the amount of digitally stored natural language tremendously.\marginnote{\url{https://www.statista.com/statistics/759234/worldwide-natural-language-processing-market-revenues-segment/} zeigt das sehr schön für die Zukunft. Brauche einen Premiumzugang.} Gantz and Reinsel predicted 2012 that the amount of digital data stored globally will double about every two years until at least the year 2020 \cite{gantz2012digital}.
+
+Many opportunities arise from this amount of digital data, specifically in the field of machine learning. In 2011, IBM's \qa{} system ``Watson'' famously outmatched professional players in the quiz show ``Jeopardy!'' \cite{ferrucci2012introduction,epstein2012making}. Kudesia et al. proposed 2012 an algorithm to detect so called CAUTIs\footnote{Catheter-associated Urinary Tract Infections}, common hospital-acquired infections, by utilizing a \nlp{} analysis with precomputed language models on the medical records of patients \cite{kudesia2012natural}.
+
 
 \section{Motivation}
-Idee: NLP benötigt große Daten, was im Grunde BigData ist (Größenordnung Peta oder Exabyte.)
-Muss entsprechend skaliert werden. Das geht einzeln mit verschiedenen NLP Frameworks, aber UIMA
-ist halt UIMA und generisch. Wär also geil wenn das anständig skalierbar ist.
-Daten von Statista finden, eventuell sogar Graphen eventuell sogar Unternehmensdaten(?)
 
-Weiterhin Name-Dropping von Watson. Was ist GATE oder spaCy
+Platzhalter für motivierende Statistiken. Idee: NLP benötigt große Daten, was im Grunde BigData ist (Größenordnung Peta oder Exabyte.) Muss entsprechend skaliert werden. Daten von Statista finden, eventuell sogar Graphen eventuell sogar Unternehmensdaten(?)
+
+Natural language is inherently unstructured and hardly machine readable. Even a seemingly easy task, like separating a sentence into words is still an ongoing research topic \cite{pak2018text}.
+
+Since many \nlp{} frameworks like Stanford's Core \nlp Suite \cite{manning-EtAl:2014:P14-5}, The Natural Language Toolkit \cite{bird2004nltk} and Apache OpenNLP \cite{opennlp} exist, there was a need for generalizing the \nlp{} approach. In 1995, the University of Sheffield began developing \nlpGate{}, a graphical development application for generic \nlp{} problems \cite{cunningham2002gate}. Aside of algorithms for typical \nlp{} tasks like tokenization, sentence splitting or part of speech tagging, \nlpGate{} provides a graphical interface for developing custom algorithms in form of plugins, which can use the results of previous \nlp{} analyses. However, the possibilities for scaling \nlpGate{} applications are sparse. In 2012, GATECloud.net launched, a proprietary, cloud based \nlpGate{} computation interface \cite{tablan2013gatecloud}. 
+
+In \cite{ferrucci2004uima}, Ferrucci and Lally introduced \uima{}, another general purpose \nlp{} framework. Initially developed by IBM, \uima{} has been open-source and is maintained by Apache since 2006. \uima{} itself provides no built-in \nlp{} analyses, but offers a common analysis structure among its plugins, which is used to combine different \nlp{} approaches into one single framework. A popular implementation example of \uima{} is IBM's \qa{} system ``Watson'', which famously outmatched professional players in the quiz show ``Jeopardy!'' in 2011 \cite{ferrucci2012introduction,epstein2012making}. For this matter, \uima{} was configured to run on thousands of processor cores to achieve a feasible reaction time \cite{epstein2012making}. Although this example seems to demonstrate that Apache \uima{} is indeed very scalable, it has its drawbacks. The native \uima{} scaling framework \uimaas{} is configured by \xml{} files, which are difficult to maintain. Furthermore it does not work out-of-the-box with other \uima{} derivatives like UIMAfit. 
+
+In this thesis, we will implement and evaluate a scale-out framework for \uima{}, which utilizes modern technology to ensure maintainability and scalability.
 
 \section{Implementation Requirements}
-Welche Kriterien für die Skalierung werden überprüft und warum ist das sinnvoll?
+\label{sec:requirements}
+The implementation should meet a number of requirements. First and foremost, the underlying framework, Apache \uima{}, must not be limited in functionality. Since one of \uima{}s strengths is the modularity and ease of plugin development, the scale-out framework to implement is required to work with native \uima{} classes without any restriction. While this requirement sounds easy to meet, it is actually quite limiting since \uima{} plugins can be arbitrary Java-Code. Without special care, such code is not necessarily thread-safe and thus can not be safely executed multiple times in parallel within one \jvm{}.
 
+The metrics, the scale-out framework should optimize, include:
+\begin{itemize}
+\item CPU Usage
+\item RAM Usage
+\item Document Throughput
+\item Byte Throughput
+\item Maintainability
+\item Implementability
+\item Code Quality
+\end{itemize}
+\marginnote{Ich sollte hier mal nach Quellen gucken. Ist zwar meist selbsterklärend, aber ein paar Schaden nicht.}
+With CPU and RAM Usage being the percentage of (virtual or real) actually used resources, higher values are more preferable. Even if many of those resources go into administrative tasks, a scaling framework should use as many of the available resources as possible when faced with a large list of parallel jobs. Thus, a value near one should be aimed for. \marginnote{Kam mir gerade die Idee. UIMA-AS deployed Services, die immer da sind (ie deren Modelle immer im RAM sind). Spark schießt alles sofort wieder ab, sobald es nicht wieder benötigt wird.}Obviously, at the same time, resource allocation when idling should be as low as possible.
 
+A little more obvious metric is the achieved throughput of data. Since collections of input documents can be shaped very differently, both, a high document and byte throughput are aimed for. When handling small documents, maybe even single words or sentences, the byte throughput is very limited to the actual input size and the large number of documents is responsible for the size of the input data collection. In such a situation, a high document throughput would be preferred to a high byte throughput. On the other hand, on larger documents, a high byte throughput is the more accurate metric since it is independent from the individual size of the input documents.
+
+The framework is aimed to work in large academic but also industry compliant environments. Therefore the maintainability is important. It describes the amount of effort to maintain any current usage of the framework, for example changing the underlying \nlp{} algorithm, modifying the hardware setup or making configuration changes. This is inherently more complicated by the genericness of \uima{}, which allows for sophisticated plug-in initialization and configuration logic, making on-the-fly changes more difficult.
+
+\marginnote{TODO: Alle plugins in plug-ins ändern}Furthermore the framework should be easy to utilize. Code that already has been written for single threaded execution should be easily reusable. This is especially important for \uima{} since large repositories of plug-ins like the \dkpro{} \cite{dkpro} already exist and are infeasible to be rewritten. 
+
+Equally important as ease of utilization is the longevity of the framework. Ensuring a maximum of Code Quality is necessary to avoid large refactorings and \api{} changes in the near future. \marginnote{Source? Keine gefunden ;\_;}In a non-academic environment, applications often have to last for a long time before replacement. Thus, a robust underlying code is aimed for.
+
+Obviously the last three bullet points, Maintainability, Implementability and Code Quality, are not easily measured, since those are subject to individual perception. However both, Maintainability and Implementability can be measured in \loc{}. \marginnote{Code Quality Analyzers finden und citen}There are many static code quality analyzers, which output a score, or at least a count of quality issues. Such a score can be used to measure the quality of the frameworks code.
 
 \section{Outline}
-Ich outline hier halt die gesamte restliche Thesis. Im Großen und Ganzen ist das hier nur ein unvollständiges und glorifiziertes Inhaltsverzeichnis.
+First, in Chapter~\ref{ch:basics}, the functionality of \uima{} is detailed, especially with focus on distributed computing and scaling. For this matter, both native \uima{} scaling frameworks, \uimaas{} and \cpe{} are subject in said chapter. Also \spark{}, a cluster-computing framework, will be briefly explained since it will form the foundation of the frameworks scaling capabilities. Lastly, approaches like Leo and v3NLP will be introduced. Those are also \uima{} based scaling solutions, which both suffer from different problems.
+
+\marginnote{Refinen, sobald Implementation geschrieben ist.}Chapter~\ref{ch:implementation} will explain the scaling framework in detail. It starts with the choice of technology and proceeds to the implementation. This includes macroscopic network views and microscopic code details.
+
+Then, Chapter~\ref{ch:evaluation} deals with the results of the framework implementation. For this, the requirements given in Section~\ref{sec:requirements} are evaluated against the framework, \uimaas{} and the single-threaded approach.
+
+Lastly, Chapter~\ref{ch:summary} summarizes the results, including possible limitations of the implementation. It also gives an outlook on how to extend and publicize the framework to the general public.
