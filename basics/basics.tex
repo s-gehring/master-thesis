@@ -1,7 +1,7 @@
 % !TeX root = ../Main.tex
 
 \chapter{Basics}
-
+\label{ch:basics}
 
 Es gibt haufenweise Konzepte, die ich für das Framework, allerdings noch eher für das Testen und Benchmarken verwendet habe. Diese muss ich natürlich alle (oder zumindest die meisten) vorstellen.
 
@@ -17,9 +17,15 @@ Ich habe es zwar nicht benutzt, aber eine kleine Einführung in HDFS könnte nü
 
 \section{UIMA-Family}
 
+ 
+
 Unbedingt bilder hinzufügen und establishen was eine Pipeline ist!!1!
 
 \subsection{Apache UIMA}
+
+Apache \uima{} is one of few general approaches to implement \nlp{} solutions. With a very modular architecture, \uima{} is a popular tool that can easily be applied to a majority of \nlp{} problems. A large part of the popularity of \uima{} stems from the large \dkpro{} collection of components, containing hundreds of analysis modules and precomputed language models \cite{eckartdecastilho-gurevych:2014:OIAF4HLT}, which are easily imported into existing Java projects with the build automation tool Apache Maven \cite{dkpro}.
+
+A common problem with \uima{} is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. \uima{} itself provides two distinct interfaces to analyze larger collections of unstructured data, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
 
 
 \subsection{UIMAfit}
