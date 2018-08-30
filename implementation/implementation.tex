@@ -1,5 +1,8 @@
 \chapter{Implementation}
 \label{ch:implementation}
+In this chapter we will first discuss the choice of \spark{} as a distribution technology. Afterwards the framework implementation details will be documented with a special focus on data distribution, namely Serialization and Compression.
+\section{Technologies}
+
 
 Erkläre die Entscheidung warum auf Spark gesetzt wurde als Distributionsframework. Das möglicherweise mit Kruchten 4+1 (\url{https://de.wikipedia.org/wiki/4\%2B1_Sichtenmodell})  aufhübschen.
 
@@ -11,4 +14,37 @@ Ich denke aus diesen Bildern kann sich recht kanonisch eine Gliederung für das 
 
 Framework schematisch in Netzwerksicht (Also welchen Weg Dokumente so in meinem FW gehen)
 
+
+
+\section{Implementation}
+
+
+\section{Data Distribution}
+Since all the input data, in form of documents, and output data, in form of analysis results, must be transmitted over a network, be it virtual or real, the serialization of larger Java objects play a role in performance. Since both, the input and the output, are stored inside a \cas{} object it suffices to find a suitable serialization algorithm for those. However, finding an optimal algorithm is not trivial and usually even depends on the input data. Larger documents produce larger \cas{}, which in turn need a longer time to be deployed to the corresponding \spark{} workers. However, small documents still are no guarantee for small \cas{} sizes, since analysis results can be of arbitrary size and number, depending on the \uima{} pipeline. 
+
+Furthermore it can be useful to compress serialized data, depending on the network setup and the serialization algorithm. Most native \uima{} serializations produce \xml{} files, which are very verbose and well compressible. Compression algorithms specifically designed for \xml{} files achieve packing ratios of up to 80\,\% \cite{girardot2005system,min2003xpress,sakr2009xml}. However, such algorithms often come at the price of a relatively high runtime. This is especially undesirable if the transmitted data is small or the serialization sparse and the expected compression ratio is low.
+
+Since an optimal choice for both, serialization and compression, is not possible for the general case the framework exposes two interfaces, namely \lstinline|CasSerialization| and \lstinline|CompressionAlgorithm|.
+\subsection{Serialization}
+In \cite{epstein2012making} Epstein et al. explain how serialization of \cas{} was an important bottleneck and a problem to solve. They configured \uimaas{} in several ways to serialize only the parts of the \cas{} object that are needed for further analysis. Obviously this can not be done in the general case when the underlying analysis algorithms are unknown, which is why the framework takes an instance of \lstinline|CasSerialization| as an optional parameter.
+
+An instance of said interface implements two methods with the signatures shown in Listing~\ref{lst:casserialization}..
+\begin{lstlisting}[language=Java,caption={CasSerialization method signatures},label=lst:casserialization]
+public byte[] serialize(CAS cas);
+public CAS deserialize(byte[] data, CAS cas);
+\end{lstlisting}
+
+While the signature of the \lstinline|serialize| method is intuitive, this does not immediately apply to the \lstinline|deserialize| function. Here, a previously created \cas{} object is given as a parameter for two reasons. First, \uima{} allows for the configuration of a custom \lstinline|CasInitializer|, which can alter the \cas{} object immediately after creation. Although the usage of \lstinline|CasInitializers| has been deprecated since at least 2006, it is still a feature of \uima{} and must therefore be taken care of \cite{uimacpe}. By creating a new \cas{} on the target \jvm{}, the framework first executes the \lstinline|CasInitializers| and then passes the resulting \cas{} to the \lstinline|deserialize| function. The second reasons for this additional parameter is to pass the current \uima{} type system. The serialized data might include annotations of types that are unknown to the native \uima{} type system and therefore must be defined before deserialization. Although a parameter \lstinline|TypeSystem| would have been sufficed, the first reason implies the requirement of a complete \cas{} parameter. Since the created \cas{} already includes the full type system description, available by \lstinline|cas.getTypeSystem()|, the framework abstains from passing another parameter to the \lstinline|deserialize| method. If \lstinline|CasInitializer|s get removed from \uima{}, this might be a feasible change in the future.
+
+The framework already ships with two implementations of the \lstinline|CasSerialization| interface, namely \lstinline|XmiCasSerialization| and \lstinline|UimaCasSerialization|. The \lstinline|XmiCasSerialization| creates complete \xmi{} files, containing the \sofa{}, all analysis results and even the used type system description. To accomplish this, it uses the \uima{} \lstinline|XmiCasSerializer| class. Thus, the \lstinline|XmiCasSerialization| implementation of \lstinline|CasSerialization| acts as a mere wrapper. The second serialization algorithm \lstinline|UimaCasSerialization| also just wraps around the native \uima{} class \lstinline|Serializer|, which is the same serialization algorithm \uimaas{} uses to distribute and retrieve \cas{} objects.
+
+\subsection{Compression}
+Since the compression results are very dependent on the use case, data size and serialization algorithm, the framework provides the user with a \lstinline|CompressionAlgorithm| interface. An implementation of said interface exposes two methods with signatures as shown in Listing~\ref{lst:cascompression}.
+\begin{lstlisting}[language=Java,caption={CompressionAlgorithm method signatures},label=lst:cascompression]
+public byte[] compress(final byte[] input);
+public byte[] decompress(final byte[] input);
+\end{lstlisting}
+Completely abstracted from any \uima{} concept, this interface simply expects two functions, \lstinline|compress| and \lstinline|uncompress| to behave such that for every input \lstinline|byte[] X| holds that \lstinline|X = decompress(compress(X))|. While this is the only technical requirement for this interface, it is usually desired to have \lstinline+|X| > |compress(X)|+. Since both methods act \uima{} unaware, reducing the object size by omitting parts of the \cas{} is not possible without deserializing the \cas{} first, a step that is defined in the \lstinline|CasSerialization| interface and not accessible from this context. 
+
+The framework ships with two implementations of the \lstinline|CompressionAlgorithm| interface. If defaults to the \lstinline|NoCompression| class, simply implementing the identity with \lstinline|X = compress(X)|, effectively disabling any kind of compression. This is useful if network delay is negligible, especially in virtual networks inside a single machine. A compression algorithm would need computation time to process all transmitted \cas{}, while saving only a minimum of transfer time. Secondly, the class \lstinline|ZLib| implements the DEFLATE compression, which is a general purpose lossless compression algorithm, commonly used in ZIP files.
 
