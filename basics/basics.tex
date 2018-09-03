@@ -18,7 +18,11 @@ Although most important aspects and concepts of \uima{} are also defined in the 
 \label{sec:uima}
 Unstructured Information Management Architecture (UIMA) Version 1.0 itself is an \oasis{} standard from 2009\footurl{http://docs.oasis-open.org/uima/v1.0/uima-v1.0.html}{2018-09-03} that defines an interface for software components, or plug-ins, which are called analytics. Those analytics are supposed to analyze unstructured information and assign machine readable semantics to it. The standard also defines ways to represent and interchange this data between analytics in favor of interoperability and platform-independence. 
 
-Apache \uima{} is the open-source implementation of said \uima{} specification. It is available for Java and C++, while its scaling solutions, \uimacpe{} and \uimaas{} are only available for Java, which is why this thesis focuses on the Java implementation. Since \uima{} and Apache \uima{} have very similar names, which may lead to confusion it is common practice to call the implementation simply \uima{} and explicitly state if talking about the specification. This practice will be adopted for the rest of the thesis.
+Apache \uima{} is the open-source implementation of said \uima{} specification. A common problem with Apache \uima{} is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. It  provides two distinct interfaces to analyze larger collections of unstructured data itself, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
+Apache \uima{} is available for Java and C++, while its scaling solutions, \uimacpe{} and \uimaas{} are only available for Java, which is why this thesis focuses on the Java implementation. Since \uima{} and Apache \uima{} have very similar names, which may lead to confusion it is common practice to call the implementation simply \uima{} and explicitly state when talking about the specification. This practice will be adopted for the rest of the thesis.
+
+
+
 
 Unbedingt bilder hinzufügen und establishen was eine Pipeline ist!!1!
 
@@ -26,7 +30,11 @@ Unbedingt bilder hinzufügen und establishen was eine Pipeline ist!!1!
 
 Apache \uima{} is one of few general approaches to implement \nlp{} solutions and the only commonly known implementation of the specification with the same name. With a very modular architecture, \uima{} is a popular tool that can easily be applied to a majority of \nlp{} problems. A large part of the popularity of \uima{} stems from the large \dkpro{} collection of components, containing hundreds of analysis modules and precomputed language models \cite{eckartdecastilho-gurevych:2014:OIAF4HLT}, which are easily imported into existing Java projects with the build automation tool Apache Maven \cite{dkpro}.
 
-A common problem with \uima{} is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. \uima{} itself provides two distinct interfaces to analyze larger collections of unstructured data, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
+\uima{} is usually used to process not single but corpora of documents. A document in this sense is text, although the \uima{} specification permits other data types as well. However, \uima{} can not handle other data types without serializing it first. The \uima{} specification, as well as the implementation do not pose limitations to the document size. However, since it is stored in a Java String variable, which itself is implemented as an array of chars, the practical limit of documents sizes are dependent on the \jvm{} version and lie around one to two gigabytes \cite{so:javastrings}.
+
+The foundation of all \uima{} related processing forms the \cas{}. The \cas{} is an object, storing the \sofa{}, all analysis results and the corresponding Type System. It is the input and the output to each analytic, getting modified in the process.
+
+An analytic in the \uima{} specification is called an \emph{Analysis Engine} in the implementation. For the most part, an \anen{} is code, that gets an input \cas{} ...
 
 
 \subsection{UIMAfit}
