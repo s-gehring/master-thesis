@@ -2,28 +2,29 @@
 
 \chapter{Basics}
 \label{ch:basics}
+In this chapter, the two most important technologies for the framework are explained. This is necessary to get an understanding of the technical difficulties it challenges and how it works. First, in Section~\ref{sec:uima} \uima{} is introduced. After an in-depth introduction into the original framework designed by IBM, \uimafit{} will be explained. \uimafit{} builds on top of \uima{}, providing the developer with a native Java interface for creating and instantiating plug-ins. Strongly related to the framework introduced in Chapter~\ref{ch:implementation} are the two native scaling frameworks \uimacpe{} and \uimaas{}. 
 
-Es gibt haufenweise Konzepte, die ich für das Framework, allerdings noch eher für das Testen und Benchmarken verwendet habe. Diese muss ich natürlich alle (oder zumindest die meisten) vorstellen.
+\marginnote{Ich habe es zwar nicht benutzt, aber eine kleine Einführung in HDFS könnte nützlich sein. Ich werde häufiger (im Kontext von BigData) anmerken, dass Daten vermutlich von einem verteiltem Dateisystem, etwa einem HDFS kommen und dahin geschrieben werden.}
 
-Ganz oben dabei ist natürlich UIMA, wobei das eigentlich schon extrem in der Introduction benutzt wird. Ich mag es nicht jetzt erst auf UIMA einzugehen. Aber was will man machen? Irgendeine Struktur braucht man ja.
+The second section of this chapter will be about \spark{}. While no advanced knowledge is needed to comprehend the usage of \spark{} as a distributed computation framework, it will still be a substantial part of the \uima{} scaling framework in Chapter~\ref{ch:implementation}. Thus, a rather superficial overview of its structure and distribution algorithm will be given.
 
-Danach kommt Spark. Da ist auf dieser Seite eher \"Benutzer\" als Developer bin, werde ich vermutlich nicht besonders tief in die Materie eingehen. Ich denke ich werde nicht bis zum Map-Reduce kommen. Und wenn dann werde ich das nur anschneiden und auf Quellen verweisen. Die internen Spark-Konzepte sind nunmal nicht wirklich wichtig für die Implementierung.
+Since numerous attempts have been made, scaling \uima{} in different settings, with varying implementation requirements, some related work will be presented in Section~\ref{sec:related}, namely Leo, providing a native Java interface for \uimaas{}, and v3NLP, a framework especially designed for usage in a medical environment and with plug-ins of such sort.
 
-Kommen wir zu dem Versuchsaufbau, kommt natürlich Docker ins Spiel. Docker spielt natürlich im Development (schnelles Deployment, etc.) eine Rolle, hat aber bei mir außerdem die Rolle des VM-Ersatzes übernommen. Wie wichtig Docker für den gesamten Versuch war, lässt sich leicht in den Docker- und Composefiles lesen. Diese garantieren darüber hinaus natürlich Vergleichbarkeit.
+Although most important aspects and concepts of \uima{} are also defined in the specifications, some minor changes and additions were made in the implementations. Since the framework must handle the actual implementation, all the presented concepts will be taken from Apache \uima{} instead of the \uima{} specification of 2009.
 
-Trotzdem sind die underlying Konzepte des Docker-Universums nicht allzu wichtig für das Framework an sich. Deployed wird es (da es sich ja nur um eine library handelt und nicht standalone arbeitet) sowieso nur über Maven. Ich plane daher auch eine mögliche Docker-Section nicht allzu groß zu gestalten.
 
-Ich habe es zwar nicht benutzt, aber eine kleine Einführung in HDFS könnte nützlich sein. Ich werde häufiger (im Kontext von BigData) anmerken, dass Daten vermutlich von einem verteiltem Dateisystem, etwa einem HDFS kommen und dahin geschrieben werden.
 
 \section{UIMA-Family}
+\label{sec:uima}
+Unstructured Information Management Architecture (UIMA) Version 1.0 itself is an \oasis{} standard from 2009\footurl{http://docs.oasis-open.org/uima/v1.0/uima-v1.0.html}{2018-09-03} that defines an interface for software components, or plug-ins, which are called analytics. Those analytics are supposed to analyze unstructured information and assign machine readable semantics to it. The standard also defines ways to represent and interchange this data between analytics in favor of interoperability and platform-independence. 
 
- 
+Apache \uima{} is the open-source implementation of said \uima{} specification. It is available for Java and C++, while its scaling solutions, \uimacpe{} and \uimaas{} are only available for Java, which is why this thesis focuses on the Java implementation. Since \uima{} and Apache \uima{} have very similar names, which may lead to confusion it is common practice to call the implementation simply \uima{} and explicitly state if talking about the specification. This practice will be adopted for the rest of the thesis.
 
 Unbedingt bilder hinzufügen und establishen was eine Pipeline ist!!1!
 
 \subsection{Apache UIMA}
 
-Apache \uima{} is one of few general approaches to implement \nlp{} solutions. With a very modular architecture, \uima{} is a popular tool that can easily be applied to a majority of \nlp{} problems. A large part of the popularity of \uima{} stems from the large \dkpro{} collection of components, containing hundreds of analysis modules and precomputed language models \cite{eckartdecastilho-gurevych:2014:OIAF4HLT}, which are easily imported into existing Java projects with the build automation tool Apache Maven \cite{dkpro}.
+Apache \uima{} is one of few general approaches to implement \nlp{} solutions and the only commonly known implementation of the specification with the same name. With a very modular architecture, \uima{} is a popular tool that can easily be applied to a majority of \nlp{} problems. A large part of the popularity of \uima{} stems from the large \dkpro{} collection of components, containing hundreds of analysis modules and precomputed language models \cite{eckartdecastilho-gurevych:2014:OIAF4HLT}, which are easily imported into existing Java projects with the build automation tool Apache Maven \cite{dkpro}.
 
 A common problem with \uima{} is scaling \cite{divita2015scaling,epstein2012making,ramakrishnan2010building}. \uima{} itself provides two distinct interfaces to analyze larger collections of unstructured data, with one being \uimaas{} and the other being the more dated and less flexible \cpe{} \cite{OASIS:UIMA:2009}.
 
@@ -45,6 +46,7 @@ Hier bietet sich auch ein Schaubild an.
 
 \marginnote{Ich bin sehr unzufrieden mit der related work in den Basics. Es passt hier absolut nicht rein. Ich werde das vermutlich bald wieder in das erste Kapitel Introduction schieben.}
 \section{Related Work}
+\label{sec:related}
 Hier im Grunde alles was es an "Vorarbeiten" bzw. konkurrierende Ansätze gibt.
 
 \subsection{Leo}
