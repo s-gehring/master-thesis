@@ -1,0 +1,5 @@
+Der Trend ist grundsätzlich: Je mehr Maschinen desto besser schneiden die Algorithmen ab.
+Dies zieht sich durch und Spark scheint am besten mit mehr Maschinen umzugehen.
+
+Ausnahme ist Pipeline 3, bei der Spark sogar noch schlechter da steht.
+Möglich wäre hier z. B. ein Docker-Fehler, der nicht alle Slave-Container startet.

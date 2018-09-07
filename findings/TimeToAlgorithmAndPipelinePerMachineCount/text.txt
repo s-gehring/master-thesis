@@ -1,0 +1,4 @@
+Hier habe ich einmal die prozentualen Verbesserungen für jeden Algorithmus und Pipeline aufgeführt, wenn man weitere Maschinen hinzufügt.
+
+Interessant ist, dass sich der Single-Threaded auch verbessert. Ansonsten scheinen die Verbesserungen sehr abhängig von der Pipeline zu sein.
+Außerdem verbessern sich Spark und UIMA-AS fast exakt gleich schnell. 
