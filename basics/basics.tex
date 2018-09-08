@@ -40,18 +40,58 @@ The Type System is a schema of all available types of annotations that may be as
 
 The \sofa{}, all analysis results in form of annotations that are compliant to an underlying Type System and the Type System itself are stored together in one large object, called a \cas{}. It is the sole input an \anen{} gets, since it incorporates the complete context needed. The annotations are stored in a larger index to optimize for efficient access. Furthermore, a \cas{} object provides different Views, lightweight versions of a \cas{}, that store their own \sofa{} and annotation index. These views are identified by a String, while the original data of the \cas{} is usually called the \emph{Initial View}.
 
-Multiple Analysis Engines that form a complete flow of analysis are commonly known as a \emph{pipeline}. Since multiple \anens{} can be aggregated into one, a pipeline is usually an instance of a single aggregate analysis engine. Because of the convention to call analysis results annotations, \anens{} are often called \emph{Annotators}, which is not correct in general, since engines do not need to attach any annotations to the input \cas{}.
+A \emph{Collection Reader} implements an interface very similar to the well-known \lstinline|Iterator|, namely it provides the functions \lstinline|boolean hasNext()| and \lstinline|CAS getNext()|. A Collection Reader usually takes the role of initializing the \cas{} with the \sofa{}. Well known Collection Readers achieve this by reading from a file system, a database or \lstinline|Collection| object, but any other collection may be read by implementing a custom Collection Reader. It is also configured by writing an \xml{} descriptor file.
 
+Multiple Analysis Engines that form a complete flow of analysis are commonly known as a \emph{pipeline}. Since multiple \anens{} can be aggregated into one, a pipeline is usually an instance of a single aggregate analysis engine. Sometimes a pipeline is meant to also include a Collection Reader, however this will not be the case in this thesis. Because of the convention to call analysis results annotations, \anens{} are often called \emph{Annotators}, which is not correct in general, since engines do not need to attach any annotations to the input \cas{}.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=1\textwidth]{uima-pipeline}
+	\caption[An example UIMA pipeline for NER.]{An example \uima{} pipeline for named entity recognition \cite{uimasdk}.}
+	\label{fig:uimaner}
+\end{figure}
+
+Figure~\ref{fig:uimaner} shows a simplified view of an analysis pipeline for named entity recognition. Given a \cas{} by a Collection Reader (omitted here), the pipeline which is really just a aggregate Analysis Engine starts to identify the language of the text with an analysis engine specifically designed to do exactly this. This \anen{} stores the results inside the \cas{} and forwards it to the next engine in line, which is a tokenizer. 
+
+A tokenizer annotates words, sentences and punctuation and is highly language dependent. It uses the analysis result given by the \anen{} before to decide upon an algorithm or model to use according to the found language. After tokenization, a Part-Of-Speech Tagger annotates each words part of speech with a different annotation according to a tag set. There are a number of tag sets for most languages, as for example the Penn Treebank Project tag set\footurl{https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html}{2018-09-08} for English and the \stts{} for German. The Part-Of-Speech Tagger is highly language dependent because of this. It also utilizes the results of the tokenizer, since it iterates over all annotations that are words.
+
+Afterwards the \cas{} gets put into a Shallow Parser, which analyzes Part-Of-Speech tags and their semantic relation among other tags in the same sentence. In a sentence `I like green apples.' a Part-Of-Speech Tagger would correctly decide that `green' is an adjective and apples is a noun. However, a parser would combine those two to form `green apples', a Noun Phrase, because `green' is an adjectival modifier of `apples'. A Parser may also be used to improve the results of a previous Part-Of-Speech tagging.
+
+A Named Entity Recognizer then takes the \cas{} object and looks for fitting entities. This is commonly a Noun of a given list, but can be more sophisticated, depending on the wanted precision, the entity type and computation speed. After the last part of the pipeline returns, the analysis is done. The resulting \cas{} now includes a number of analysis results in form of annotations and can now be extracted or processed further.
 
 \subsection{UIMAfit}
-Since \uima{} needs \xml{} descriptor files to configure and describe its components, especially pipelines and type systems, developing for it is very \xml{} heavy. Apache \uimafit{} is a framework that builds on \uima{}, providing an interface to programmatically describe, instantiate and deploy \uima{} components \cite{ogren-bethard:2009:SETQA-NLP}. \uimafit{} also provides an interface to dynamically write \xml{} descriptor files for \uima{} components. However, since it is able to instantiate and deploy said components without the need of \xml{} files, those are mostly ignored because of \uimafit{}. \uimaas{}, a native \uima{} scaling framework described in Section~\ref{ssec:uimaas}, is known to be widely incompatible with \uimafit{} which is what led to the creation of Leo, described in Section~\ref{ssec:leo}.
+\label{ssec:uimafit}
+Since \uima{} needs \xml{} descriptor files to configure and describe most of its components, especially pipelines and type systems, developing for it is very \xml{} heavy and leads to code that is hard to maintain. Apache \uimafit{} is a framework that builds on \uima{}, providing an interface to programmatically describe, instantiate and deploy \uima{} components \cite{ogren-bethard:2009:SETQA-NLP}. \uimafit{} also provides an interface to dynamically write \xml{} descriptor files for \uima{} components. However, since it is able to instantiate and deploy said components without the need of \xml{} files, those are mostly ignored. \uimaas{}, a native \uima{} scaling framework described in Section~\ref{ssec:uimaas}, is known to be widely incompatible with \uimafit{} which is what led to the creation of Leo, described in Section~\ref{ssec:leo}.
 
 \uimafit{} has been part of the Apache \uima{} project since 2012 and is therefore officially supported \cite{github:uimafit}. 
 
 
+
 \subsection{UIMA-CPE}
-UIMA CPE ist der Vorgänger von UIMA-AS und basiert im Grunde darauf, dem User vollständige Macht zu geben um die Skalierung zu bewerkstelligen. Das geht natürlich vollkommen nach hinten los, da Dinge wie Cas Initializers nicht trivial zu konfigurieren sind. Außerdem musste sich der User selbstständig um Dinge wie reconfigure() und typeSystemInit() kümmern. 
-Natürlich basiert CPE auch auf XML-Deskriptoren, für die kein UIMAfit/Leo existiert.
+\label{ssec:uimacpe}
+\uimacpe{} was the first method to add distributed computation capability to \uima{}. Nowadays it has been replaced by \uimaas{} and is mostly obsolete. It made use of so called \emph{\cas{} Consumers}, engines that do not analyze the \cas{}, but extract the needed analysis results from it and process the data as wanted. Common uses for \cas{} Consumers are writing analysis results into a database or serializing the whole \cas{} into a \xmi{} file. \cas{} Consumers have been deprecated and replaced by \anens{} since 2006 \uimacpe{} because \cas{} Consumers do not provide any new functionality or are semantically different from Analysis Engines. Historically a \cas{} Consumer would not add anything to a \cas{} object. This convention of a reading-only Analysis Engine is often used to provide maximum modularity among \uima{} engines.
+
+
+Another concept exclusive to \uimacpe{} are \cas{} Initializers, which also have been deprecated for over a decade, but are still included in \uima{}. A \cas{} Initializer was responsible to populate a \cas{} from an object given by the Collection Reader. It therefore implemented the function \lstinline|initializeCas(Object document, CAS cas)|. This was used for more complex collection reading capabilities and \cas{} Initializers are generally seen as a plug-in to Collection Readers to extend their functionality. If -- for example -- only table of contents of larger documents are meant to be analyzed, then a Collection Reader would read the whole document and pass it to the \cas{} Initializer, which would search for a table of contents and fill the \cas{} with its findings and discard the rest of the document.
+
+
+\begin{figure}[hbt]
+	
+	\centering
+	\includegraphics[width=1\textwidth]{uima-cpe}
+	\caption[All \uimacpe{} components.]{All \uimacpe{} components \cite{uimacpe}.}
+	\label{fig:uimacpe}
+\end{figure}
+
+
+Figure~\ref{fig:uimacpe} shows a complete example pipeline. It starts with any kind of collections, maybe containing meta data. A common example would be a folder hierarchy with last modified timestamps. The Collection Reader is aware of this collection and implements an \lstinline|Iterator| like interface, returning plain \lstinline|Object|s. These are given to the \cas{} Initializer. Notice, that the \cas{} Initializer must be aware of what kind of entity the Collection Reader sends it. The \cas{} Initializer then fills a \cas{} object with some data from the given input \lstinline|Object|. It might also create some first annotations to store meta data inside the \cas{}, such as the source document \URL{} or the creation timestamp. 
+
+The \cas{} is then sent to the pipeline, containing one or more \anens{}, providing analysis results in form of annotations that are stored inside the \cas{}. Notice that the corresponding \cas{} object for a document always stays the same identical object. A \cas{} and its corresponding document are therefore closely associated to each other. After the analysis phase, the \cas{} is sent to the \cas{} Consumers. Those aggregate the analysis results and process it further. This process is commonly the indexing into a database or printing logs to a log file or console. Since \cas{} Consumers have read-only access to the \cas{} object they get, all of them might be processed in parallel, provided that the consumers do not interfere with each other.
+
+All these components in combination with the \uima{} \cpm{} forms the \uimacpe{}. The Collection Processing Manager provides configuration options for deployment, instantiation, and error recovery. It monitors the whole process and collects statistics. By configuration of the \cpm{} scaling is possible either locally or on distributed machines.
+
+For all three components introduced in this Section~\ref{ssec:uimacpe} \xml{} descriptor files are needed for configuration. The concept of a \uimacpe{} is widely incompatible with \uimafit{}, described in Section~\ref{ssec:uimafit}. \uimafit{} is able to instantiate a \cpe{}, but relies on some hardcoded default configuration, making complex multithreading applications impossible\footurl{https://uima.apache.org/d/uimafit-2.0.0/api/org/apache/uima/fit/cpe/CpeBuilder.html}{2018-09-08}.
+
 
 \subsection{UIMA-AS}
 \label{ssec:uimaas}
