@@ -95,11 +95,27 @@ For all three components introduced in this Section~\ref{ssec:uimacpe} \xml{} de
 
 \subsection{UIMA-AS}
 \label{ssec:uimaas}
-Das bisherige non+ultra. Man deployed pipelines (oder einzelne engines) als Services, die sich am broker registrieren. Anfragen werden an den Broker geschickt, der sie dann weiter sendet. Je nach Broker-Implementierung kann man hier sehr schön resilience zu bauen. Es gibt hier ein paar Dinge zu beachten, was thread-safety angeht. Außerdem ist fraglich ob UIMA-AS tatsächlich uneingeschränkt skalierbar ist, da der CollectionReader möglicherweise einen bottleneck darstellt. Problematisch ist in jedem Fall die Tatsache, dass das gesamte CAS wieder zurück geschickt wird. Das ist möglicherweise gar nicht gewollt, da in der Pipeline bereits consumer bereit stehen, die Dinge in Datenbanken etc schreiben.
+\uimaas{} is the successor of \uimacpe{}, providing more flexibility for scaling and deploying than its predecessor. It deploys \anens{} as services and registers them at a broker. \uimaas{} ships with a preconfigured instance of Apache ActiveMQ, which is an open source message broker that implements the Java Messaging Service. Other implementations can also be used though. If an \uimaas{} client now queries the broker, it submits a serialized \cas{} object to the input queue that is responsible for the wanted analysis. When any registered service finishes its current job, it pulls a new \cas{} from the broker and starts processing. This analysis process can also be multithreaded inside a single service. This is configurable by the deployment \xml{} descriptor files of the \anens{}, but must be handled with care since multiple instances of Analysis Engines in the same \jvm{} share static resources. After finishing the process, either successfully or by failing, the service returns the \cas{} object to the brokers corresponding output queue where it waits until the broker finds time to forward it to the waiting client. The described process can be seen in Figure~\ref{fig:uimaas-ae}. The user-defined \anen{} get wrapped by a \uimaas{} controller, that handles communication with the input and output queue. These queues are provided by a broker, here ActiveMQ.
 
-Das ist ein wenig die Verteidigung für mein System, bei dem es absolut grauenvoll ist, wenn man die CAS wieder zurück schickt :D
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=0.5\textwidth]{uima-as-ae}
+	\caption[An Analysis Engine as a service in UIMA-AS.]{An Analysis Engine as a service in \uimaas{} \cite{uimaas:documentation}.}
+	\label{fig:uimaas-ae}
+\end{figure}
 
-Hier bietet sich auch ein Schaubild an.
+To provide capabilities of a more complex analysis flow instead of the simple synchronous order, the user can implement what is called a \emph{Flow Controller}. An aggregate Analysis Engine can have at most one Flow Controller, that handles what \anen{} gets the \cas{} next. Usually \uima{} defaults to the \lstinline|FixedFlow| class, which executes \anens{} one after another, but more sophisticated flows can be implemented. If an aggregate Analysis Engine contains such a Flow Controller, further queues are installed. Figure~\ref{fig:uimaas-aea} shows such an advanced pipeline containing a flow controller and two delegate Analysis Engines. Submitting a \cas{} to the aggregate Analysis Engine queues it into the queue of the Flow Controller (FC). When it finishes its current computation, the Controller is faced with the decision what delegate Analysis Engine should obtain the \cas{} for processing and appends it to the corresponding queue. Notice that said queue is also provided by ActiveMQ (or any other implementation). After analysis, the \cas{} is sent back to the Flow Controller, or more specifically its output queue. It may now decide to send the processed \cas{} to another delegate \anen{} or stop processing and output it to the brokers output queue. The large amount of queue may seem excessive, but it is necessary to provide a synchronous execution of the Flow Controller and -- if configured -- the Analysis Engines.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=1\textwidth]{uima-as-aea}
+	\caption[An aggregate Analysis Engine as a service in UIMA-AS.]{An aggregate Analysis Engine as a service in \uimaas{} \cite{uimaas:documentation}.}
+	\label{fig:uimaas-aea}
+\end{figure}
+
+Since the \cas{} object contains everything, the \sofa{}, all analysis results, the type system, and maybe even different views, it can grow quite large over the span of a complicated pipeline. This forms a problem in \uimaas{}, since the \cas{} has to be serialized for every transport inside the system, from client to broker, from broker to service, from Flow Controller to delegate Analysis Engines and the whole way back. Serialization however is a costly task and even if the underlying \nlp{} analysis is very sophisticated, serialization might not be negligible. Epstein et al. handle this problem in \cite{epstein2012making} by avoiding serialization on local instances and introducing a sparse Delta-\cas{} serialization, containing only changes in respect to an original \cas{}.
+
+As most parts of the native \uima{} framework, \uimaas{} is configured by writing an \xml{} descriptor, containing all the necessary data for deployment. A dynamic creation of said descriptor files is currently not possible with \uimafit{}, but is provided by Leo, described in Section~\ref{ssec:leo}.
 
 \section{Apache Spark}
 
