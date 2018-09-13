@@ -1,0 +1,84 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'activity-diagram.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{334.5bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.27130045)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{activity-diagram.pdf}}%
+    \put(0.20067265,1.11995516){\color[rgb]{0.30196078,0.24313725,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Read Documents\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{activity-diagram.pdf}}%
+    \put(0.19955157,0.95852018){\color[rgb]{0.30196078,0.24313725,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Create CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{activity-diagram.pdf}}%
+    \put(0.19843049,0.7970852){\color[rgb]{0.30196078,0.24313725,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Serialize CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{activity-diagram.pdf}}%
+    \put(0.19843049,0.63565022){\color[rgb]{0.30196078,0.24313725,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Compress CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{activity-diagram.pdf}}%
+    \put(0.20403587,0.47421525){\color[rgb]{0.30196078,0.24313725,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Distribute to Spark Workers\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{activity-diagram.pdf}}%
+    \put(0.83408072,0.64910314){\color[rgb]{0.18039216,0.24313725,0.18039216}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Process CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{activity-diagram.pdf}}%
+    \put(0.83632287,1.00336323){\color[rgb]{0.18039216,0.24313725,0.18039216}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Decompress CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{activity-diagram.pdf}}%
+    \put(0.82735426,0.82623318){\color[rgb]{0.18039216,0.24313725,0.18039216}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Deserialize CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{activity-diagram.pdf}}%
+    \put(0.83295964,0.29484305){\color[rgb]{0.18039216,0.24313725,0.18039216}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Compress CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{activity-diagram.pdf}}%
+    \put(0.83295964,0.47197309){\color[rgb]{0.18039216,0.24313725,0.18039216}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Serialize CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{activity-diagram.pdf}}%
+    \put(0.83295964,0.117713){\color[rgb]{0.18039216,0.24313725,0.18039216}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Send to Spark Master\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{activity-diagram.pdf}}%
+    \put(0.20179372,0.117713){\color[rgb]{0.30196078,0.24313725,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Deserialize CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{activity-diagram.pdf}}%
+    \put(0.20179372,0.23878924){\color[rgb]{0.30196078,0.24313725,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Decompress CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{activity-diagram.pdf}}%
+  \end{picture}%
+\endgroup%
