@@ -1,0 +1,133 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'shared-uima-processor-uml.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{591bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.85279188)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{shared-uima-processor-uml.pdf}}%
+    \put(0.3572335,0.82804569){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{SharedUimaProcessor}\end{tabular}}}}%
+    \put(0.3572335,0.80774112){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from distributed)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{shared-uima-processor-uml.pdf}}%
+    \put(0.07423858,0.7785533){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}casCompression: CompressionAlgorithm\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{shared-uima-processor-uml.pdf}}%
+    \put(0.07423858,0.75317259){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}casSerialization: CasSerialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{shared-uima-processor-uml.pdf}}%
+    \put(0.07423858,0.72652284){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}SharedUimaProcessor(sparkConfiguration, compression, serialization, logger)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{shared-uima-processor-uml.pdf}}%
+    \put(0.07423858,0.70114213){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}process(readerDescription, pipelineDescription, partitionNum): AnalysisResult\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{shared-uima-processor-uml.pdf}}%
+    \put(0.16751269,0.57043147){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{« Interface »}\end{tabular}}}}%
+    \put(0.16751269,0.54885787){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{CompressionAlgorithm}\end{tabular}}}}%
+    \put(0.16751269,0.5285533){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from compression)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{shared-uima-processor-uml.pdf}}%
+    \put(0.07423858,0.49936548){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}compress(Byte[*]): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{shared-uima-processor-uml.pdf}}%
+    \put(0.07423858,0.47398477){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}decompress(Byte[*]): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{shared-uima-processor-uml.pdf}}%
+    \put(0.16814721,0.33185279){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{NoCompression}\end{tabular}}}}%
+    \put(0.16814721,0.31154822){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from compression)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{shared-uima-processor-uml.pdf}}%
+    \put(0.06662437,0.28236041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}getInstance(): NoCompression\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{shared-uima-processor-uml.pdf}}%
+    \put(0.06662437,0.2569797){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}compress(Byte[*]): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{shared-uima-processor-uml.pdf}}%
+    \put(0.06662437,0.23159898){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}decompress(Byte[*]): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{shared-uima-processor-uml.pdf}}%
+    \put(0.16878173,0.11104061){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{ZLib}\end{tabular}}}}%
+    \put(0.16878173,0.09073604){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from compression)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{shared-uima-processor-uml.pdf}}%
+    \put(0.07550761,0.06154822){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}getInstance(): ZLib\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{shared-uima-processor-uml.pdf}}%
+    \put(0.07550761,0.03616751){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}compress(Byte[*]): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{shared-uima-processor-uml.pdf}}%
+    \put(0.07550761,0.0107868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}decompress(Byte[*]): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{shared-uima-processor-uml.pdf}}%
+    \put(0.6751269,0.56916244){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{« Interface »}\end{tabular}}}}%
+    \put(0.6751269,0.54758883){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{CasSerialization}\end{tabular}}}}%
+    \put(0.6751269,0.52728426){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from serialization)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{shared-uima-processor-uml.pdf}}%
+    \put(0.37880711,0.49809645){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}serialize(org.apache.uima.cas.CAS[0..1]): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{shared-uima-processor-uml.pdf}}%
+    \put(0.37880711,0.47271574){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}deserialize(Byte[*], org.apache.uima.cas.CAS[0..1]): org.apache.uima.cas.CAS[0..1]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{shared-uima-processor-uml.pdf}}%
+    \put(0.76649746,0.33185279){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{UimaSerialization}\end{tabular}}}}%
+    \put(0.76649746,0.31154822){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from serialization)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{shared-uima-processor-uml.pdf}}%
+    \put(0.57931472,0.28236041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}getInstance(): UimaSerialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{shared-uima-processor-uml.pdf}}%
+    \put(0.57931472,0.2569797){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}serialize(cas): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{shared-uima-processor-uml.pdf}}%
+    \put(0.57931472,0.23159898){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}deserialize(data, cas): org.apache.uima.cas.CAS[0..1]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{shared-uima-processor-uml.pdf}}%
+    \put(0.7677665,0.11104061){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{XmiCasSerialization}\end{tabular}}}}%
+    \put(0.7677665,0.09073604){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from serialization)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{shared-uima-processor-uml.pdf}}%
+    \put(0.58058376,0.06154822){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}getInstance(): XmiCasSerialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{shared-uima-processor-uml.pdf}}%
+    \put(0.58058376,0.03616751){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}serialize(cas): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=27]{shared-uima-processor-uml.pdf}}%
+    \put(0.58058376,0.0107868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}deserialize(data, cas): org.apache.uima.cas.CAS[0..1]\end{tabular}}}}%
+    \put(0.23794416,0.61865482){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}casCompression\end{tabular}}}}%
+    \put(0.14403553,0.61992386){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0.07043147,0.3927665){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}instance\end{tabular}}}}%
+    \put(0.03236041,0.375){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0..1\end{tabular}}}}%
+    \put(0.07931472,0.17195431){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}instance\end{tabular}}}}%
+    \put(0.04124365,0.15418782){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0..1\end{tabular}}}}%
+    \put(0.57804569,0.62246193){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}casSerialization\end{tabular}}}}%
+    \put(0.48794416,0.62119289){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0.58312183,0.3927665){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}instance\end{tabular}}}}%
+    \put(0.54505076,0.375){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0..1\end{tabular}}}}%
+    \put(0.58439086,0.17195431){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}instance\end{tabular}}}}%
+    \put(0.5463198,0.15418782){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0..1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=28]{shared-uima-processor-uml.pdf}}%
+  \end{picture}%
+\endgroup%
