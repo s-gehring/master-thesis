@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='139 -15 606 460' xmlns:xlink='http://www.w3.org/1999/xlink' width='606.0px' font-size='13' font-family='Arial, LiberationSans' version='1.1' height='460.0px'>
+  <defs>
+<style type='text/css'><![CDATA[svg text {text-rendering: geometricPrecision;}]]></style>    <linearGradient y1='0.0%' x1='0.0%' y2='100.0%' x2='0.0%' id='gradient-ffffff-eeeeee' spreadMethod='pad'>
+      <stop stop-opacity='1' offset='0' stop-color='rgb(255, 255, 255)'/>
+      <stop stop-opacity='1' offset='100' stop-color='rgb(238, 238, 238)'/>
+    </linearGradient>
+    <linearGradient y1='0.0%' x1='0.0%' y2='100.0%' x2='0.0%' id='gradient-ffffff-efe9de' spreadMethod='pad'>
+      <stop stop-opacity='1' offset='0' stop-color='rgb(255, 255, 255)'/>
+      <stop stop-opacity='1' offset='100' stop-color='rgb(239, 233, 222)'/>
+    </linearGradient>
+  </defs>
+  <desc>SequenceDiagram</desc>
+  <g transform='translate(169.0,15.0)' id='_-z01QJljEDa3idtMOQY8YA'>
+    <rect rx='3.0' ry='3.0' x='0.0' width='136.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-eeeeee)' stroke='rgb(187, 187, 187)' look='allInOne' height='34.0px'/>
+    <line y1='34.0' x1='68.0' y2='400.0' stroke-dasharray='10, 5' x2='68.0' stroke-width='1.0' stroke='rgb(187, 187, 187)' look='border'/>
+    <g transform='translate(9.0)'>
+      <image x='0.0' width='16.0' y='10.0' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAMFBMVEX///9woMRAgLDi8P84e7Dp9P86fLDw9/88fbD3+/89frD+/v8/f7AAUpEAS4XA0+HHhLc3AAAAAXRSTlMAQObYZgAAAAFiS0dEDxi6ANkAAAAHdElNRQfhBA4RJS4tUqcbAAAAQElEQVQI12NgYFQCAQYGBiZjIDABMUKBIAzEKAeCChBjJhDMAjF2A8EeIAOo6xJYFxA8YICCDzDGAwwGMVIgAADwcBTlv8WhiQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMS0yMVQxNDozOTowMyswMTowMC1TktIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDEtMjFUMTQ6Mzk6MDMrMDE6MDBcDipuAAAAAElFTkSuQmCC' height='16.0'/>
+      <text font-weight='bold' text-anchor='start' x='18.0' y='22.0' font-size='13' fill='rgb(3, 54, 86)'>UIMA Processor</text>
+    </g>
+  </g>
+  <g transform='translate(362.0,15.0)' id='_CNSrcJlkEDa3idtMOQY8YA'>
+    <rect rx='3.0' ry='3.0' x='0.0' width='136.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-eeeeee)' stroke='rgb(187, 187, 187)' look='allInOne' height='34.0px'/>
+    <line y1='34.0' x1='68.0' y2='400.0' stroke-dasharray='10, 5' x2='68.0' stroke-width='1.0' stroke='rgb(187, 187, 187)' look='border'/>
+    <g transform='translate(9.0)'>
+      <image x='0.0' width='16.0' y='10.0' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVR42s1SSW4CMRDkPRy48odh/QVXPsASkfkHTxj2DyDxBm7kFIKykWTCDIzddLVlE8MJCYmMVKrqcnXJGjmX+xdfsz+n+uOUMROuCTNC1iHYAL4FdlxBrTel1csP41v4aWOwEjaeaMkYrvYmp4JKd0zrjx3jl6LFktbvO8oXGw7wnu0ZM7LVh7Ff8PqVSqAQhKwTWQRb/caMM2SQvSjYxnsJgIHzG1gfmU/mi4I4ObgbQGMxTjPRcWLY3gCzX9AZUXpQAgTAKNgzW/w9w1zmHVdQbg8oU0SZZihNioFZWGvnKXja6FJ76BeUWhFjQEHrpO0cOB8cyTl2vAL8mGtw2wI8SxjXwHvKd/2OjIkS2lS0Ip0AAAAASUVORK5CYII=' height='16.0'/>
+      <text font-weight='bold' text-anchor='start' x='18.0' y='22.0' font-size='13' fill='rgb(3, 54, 86)'>Represent: Byte</text>
+    </g>
+  </g>
+  <g transform='translate(499.0,15.0)' id='_MG3_sJlkEDa3idtMOQY8YA'>
+    <rect rx='3.0' ry='3.0' x='0.0' width='90.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-eeeeee)' stroke='rgb(187, 187, 187)' look='allInOne' height='34.0px'/>
+    <line y1='34.0' x1='45.0' y2='400.0' stroke-dasharray='10, 5' x2='45.0' stroke-width='1.0' stroke='rgb(187, 187, 187)' look='border'/>
+    <g transform='translate(13.5)'>
+      <image x='0.0' width='16.0' y='10.0' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAMFBMVEX///9woMRAgLDi8P84e7Dp9P86fLDw9/88fbD3+/89frD+/v8/f7AAUpEAS4XA0+HHhLc3AAAAAXRSTlMAQObYZgAAAAFiS0dEDxi6ANkAAAAHdElNRQfhBA4RJS4tUqcbAAAAQElEQVQI12NgYFQCAQYGBiZjIDABMUKBIAzEKAeCChBjJhDMAjF2A8EeIAOo6xJYFxA8YICCDzDGAwwGMVIgAADwcBTlv8WhiQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMS0yMVQxNDozOTowMyswMTowMC1TktIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDEtMjFUMTQ6Mzk6MDMrMDE6MDBcDipuAAAAAElFTkSuQmCC' height='16.0'/>
+      <text font-weight='bold' text-anchor='start' x='18.0' y='22.0' font-size='13' fill='rgb(3, 54, 86)'>Worker</text>
+    </g>
+  </g>
+  <g transform='translate(625.0,15.0)' id='_jlnsoJllEDa3idtMOQY8YA'>
+    <rect rx='3.0' ry='3.0' x='0.0' width='90.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-eeeeee)' stroke='rgb(187, 187, 187)' look='allInOne' height='34.0px'/>
+    <line y1='34.0' x1='45.0' y2='400.0' stroke-dasharray='10, 5' x2='45.0' stroke-width='1.0' stroke='rgb(187, 187, 187)' look='border'/>
+    <g transform='translate(13.5)'>
+      <image x='0.0' width='16.0' y='10.0' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAMFBMVEX///9woMRAgLDi8P84e7Dp9P86fLDw9/88fbD3+/89frD+/v8/f7AAUpEAS4XA0+HHhLc3AAAAAXRSTlMAQObYZgAAAAFiS0dEDxi6ANkAAAAHdElNRQfhBA4RJS4tUqcbAAAAQElEQVQI12NgYFQCAQYGBiZjIDABMUKBIAzEKAeCChBjJhDMAjF2A8EeIAOo6xJYFxA8YICCDzDGAwwGMVIgAADwcBTlv8WhiQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMS0yMVQxNDozOTowMyswMTowMC1TktIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDEtMjFUMTQ6Mzk6MDMrMDE6MDBcDipuAAAAAElFTkSuQmCC' height='16.0'/>
+      <text font-weight='bold' text-anchor='start' x='18.0' y='22.0' font-size='13' fill='rgb(3, 54, 86)'>Worker</text>
+    </g>
+  </g>
+  <g transform='translate(422.0,139.0)' id='_RTbkIJlkEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='210.0px'/>
+  </g>
+  <g transform='translate(536.0,158.0)' id='_rOPq4JllEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='50.0px'/>
+  </g>
+  <g transform='translate(662.0,182.0)' id='_r8uhgZllEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='80.0px'/>
+  </g>
+  <g transform='translate(536.0,223.0)' id='_sdN_cJllEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='50.0px'/>
+  </g>
+  <g transform='translate(662.0,276.0)' id='_tIB3AJllEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='50.0px'/>
+  </g>
+  <g transform='translate(536.0,315.0)' id='_uItQ4ZllEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='23.0px'/>
+  </g>
+  <g transform='translate(422.0,204.0)' id='_B1VzkJlmEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='23.0px'/>
+  </g>
+  <g transform='translate(422.0,260.0)' id='_G7GzgZlmEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='23.0px'/>
+  </g>
+  <g transform='translate(422.0,334.0)' id='_KdptMJlmEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='23.0px'/>
+  </g>
+  <g transform='translate(422.0,324.0)' id='_N87QcJlmEDa3idtMOQY8YA'>
+    <rect rx='2.0' ry='2.0' x='0.0' width='16.0px' y='0.0' stroke-width='1.0' fill='url(#gradient-ffffff-efe9de)' stroke='rgb(194, 183, 159)' look='allInOne' height='23.0px'/>
+  </g>
+  <g transform='translate(190.0,116.0)' id='_RTq0sJlkEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='81.0' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>master(CollectionReader)</text>
+    </g>
+  </g>
+  <g transform='translate(235.0,327.0)' id='_RTvGIJlkEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='38.0' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>List&lt;CAS&gt;</text>
+    </g>
+  </g>
+  <g transform='translate(363.0,139.0)' id='_rOfigJllEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='49.0' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>process(cas1)</text>
+    </g>
+  </g>
+  <g transform='translate(493.0,158.0)' id='_r9AOUZllEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='49.0' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>process(cas2)</text>
+    </g>
+  </g>
+  <g transform='translate(363.0,205.0)' id='_sdfsQZllEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='49.0' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>process(cas3)</text>
+    </g>
+  </g>
+  <g transform='translate(493.0,256.0)' id='_tISVsJllEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='49.0' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>process(cas4)</text>
+    </g>
+  </g>
+  <g transform='translate(363.0,291.0)' id='_uJCoEJllEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='49.0' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>process(cas5)</text>
+    </g>
+  </g>
+  <g transform='translate(378.0,182.0)' id='_B15NMZlmEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='33.5' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>response</text>
+    </g>
+  </g>
+  <g transform='translate(508.0,238.0)' id='_G7i4YZlmEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='33.5' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>response</text>
+    </g>
+  </g>
+  <g transform='translate(378.0,336.0)' id='_KeNt4JlmEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='33.5' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>response</text>
+    </g>
+  </g>
+  <g transform='translate(508.0,302.0)' id='_N9U5EZlmEDa3idtMOQY8YA'>
+    <g transform='translate(0.0,0.0)'>
+      <text text-anchor='middle' x='33.5' y='16.0' font-size='13' fill='rgb(0, 0, 0)'>response</text>
+    </g>
+  </g>
+  <g id='_RTQlAJlkEDa3idtMOQY8YA'>
+    <line y1='139.0' x1='237.0' y2='139.0' x2='422.0' id='_RTgcoJlkEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(422.0,139.0) rotate(90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='139.0' x1='237.0' y2='139.0' x2='422.0' id='_RTgcoJlkEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_RTTBQJlkEDa3idtMOQY8YA'>
+    <line y1='349.0' x1='422.0' y2='349.0' x2='237.0' stroke-dasharray='1, 2' id='_RTufEJlkEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polyline transform='translate(237.0,349.0) rotate(-90.0)' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)' points='-5.0,10.0 0.0,0.0 5.0,10.0'/>
+    <line y1='349.0' x1='422.0' y2='349.0' x2='237.0' stroke-dasharray='1, 2' id='_RTufEJlkEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_rOKyYJllEDa3idtMOQY8YA'>
+    <line y1='158.0' x1='438.0' y2='158.0' x2='536.0' id='_rOSuMpllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(536.0,158.0) rotate(90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='158.0' x1='438.0' y2='158.0' x2='536.0' id='_rOSuMpllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_r8qQEJllEDa3idtMOQY8YA'>
+    <line y1='182.0' x1='438.0' y2='182.0' x2='662.0' id='_r8yL4pllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(662.0,182.0) rotate(90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='182.0' x1='438.0' y2='182.0' x2='662.0' id='_r8yL4pllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_sdHRwJllEDa3idtMOQY8YA'>
+    <line y1='223.0' x1='438.0' y2='223.0' x2='536.0' id='_sdS38pllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(536.0,223.0) rotate(90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='223.0' x1='438.0' y2='223.0' x2='536.0' id='_sdS38pllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_tH8-gJllEDa3idtMOQY8YA'>
+    <line y1='276.0' x1='438.0' y2='276.0' x2='662.0' id='_tIDsMpllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(662.0,276.0) rotate(90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='276.0' x1='438.0' y2='276.0' x2='662.0' id='_tIDsMpllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_uIqNkZllEDa3idtMOQY8YA'>
+    <line y1='315.0' x1='438.0' y2='315.0' x2='536.0' id='_uIufAZllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(536.0,315.0) rotate(90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='315.0' x1='438.0' y2='315.0' x2='536.0' id='_uIufAZllEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_B1SJMJlmEDa3idtMOQY8YA'>
+    <line y1='204.0' x1='536.0' y2='204.0' x2='438.0' id='_B1aFAJlmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(438.0,204.0) rotate(-90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='204.0' x1='536.0' y2='204.0' x2='438.0' id='_B1aFAJlmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_G7B7AJlmEDa3idtMOQY8YA'>
+    <line y1='260.0' x1='662.0' y2='260.0' x2='438.0' id='_G7LE8ZlmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(438.0,260.0) rotate(-90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='260.0' x1='662.0' y2='260.0' x2='438.0' id='_G7LE8ZlmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_KdjmkJlmEDa3idtMOQY8YA'>
+    <line y1='334.0' x1='536.0' y2='334.0' x2='438.0' id='_KdriYplmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(438.0,334.0) rotate(-90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='334.0' x1='536.0' y2='334.0' x2='438.0' id='_KdriYplmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+  <g id='_N82_AZlmEDa3idtMOQY8YA'>
+    <line y1='324.0' x1='662.0' y2='324.0' x2='438.0' id='_N89FoplmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+    <polygon transform='translate(438.0,324.0) rotate(-90.0)' stroke-width='1.0' fill='rgb(0, 0, 0)' stroke='rgb(0, 0, 0)' points='-4.0,12.0 0.0,0.0 4.0,12.0'/>
+    <line y1='324.0' x1='662.0' y2='324.0' x2='438.0' id='_N89FoplmEDa3idtMOQY8YA' stroke-width='1.0' fill='none' stroke='rgb(0, 0, 0)'/>
+  </g>
+</svg>

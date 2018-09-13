@@ -1,0 +1,78 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'sequence-diagram.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{410.25bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.7321755)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{sequence-diagram.pdf}}%
+    \put(0.05027422,0.69104205){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{UIMA Processor}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{sequence-diagram.pdf}}%
+    \put(0.40310786,0.69104205){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Represent: Byte}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{sequence-diagram.pdf}}%
+    \put(0.66179159,0.69104205){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Worker}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{sequence-diagram.pdf}}%
+    \put(0.89213894,0.69104205){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Worker}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{sequence-diagram.pdf}}%
+    \put(0.18738574,0.51736746){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}master(CollectionReader)\end{tabular}}}}%
+    \put(0.19104205,0.13162706){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}List<CAS>\end{tabular}}}}%
+    \put(0.44515539,0.47531993){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}process(cas1)\end{tabular}}}}%
+    \put(0.68281536,0.44058501){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}process(cas2)\end{tabular}}}}%
+    \put(0.44515539,0.35466179){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}process(cas3)\end{tabular}}}}%
+    \put(0.68281536,0.26142596){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}process(cas4)\end{tabular}}}}%
+    \put(0.44515539,0.19744059){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}process(cas5)\end{tabular}}}}%
+    \put(0.44424132,0.39670932){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}response\end{tabular}}}}%
+    \put(0.68190128,0.29433272){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}response\end{tabular}}}}%
+    \put(0.44424132,0.11517367){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}response\end{tabular}}}}%
+    \put(0.68190128,0.1773309){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}response\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{sequence-diagram.pdf}}%
+  \end{picture}%
+\endgroup%
