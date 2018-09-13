@@ -115,7 +115,7 @@ To provide capabilities of a more complex analysis flow instead of the simple sy
 
 Since the \cas{} object contains everything, the \sofa{}, all analysis results, the type system, and maybe even different views, it can grow quite large over the span of a complicated pipeline. This forms a problem in \uimaas{}, since the \cas{} has to be serialized for every transport inside the system, from client to broker, from broker to service, from Flow Controller to delegate Analysis Engines and the whole way back. Serialization however is a costly task and even if the underlying \nlp{} analysis is very sophisticated, serialization might not be negligible. Epstein et al. handle this problem in \cite{epstein2012making} by avoiding serialization on local instances and introducing a sparse Delta-\cas{} serialization, containing only changes in respect to an original \cas{}.
 
-As most parts of the native \uima{} framework, \uimaas{} is configured by writing an \xml{} descriptor, containing all the necessary data for deployment. A dynamic creation of said descriptor files is currently not possible with \uimafit{}, but is provided by Leo, described in Section~\ref{ssec:leo}.
+As most parts of the native \uima{} framework, \uimaas{} is configured by writing an \xml{} descriptor, containing all the necessary data for deployment. A dynamic creation of said descriptor files is currently not possible with \uimafit{}, but is provided by Leo, described in Section~\ref{ssec:leo} `\nameref{ssec:leo}'.
 
 \section{Distributed Computation}
 \marginnote{Bisschen history? Eigentlich langweilig, ich erkläre hier schon extrem simple Dinge.}When handling large sets of data, a single machine may not be sufficient to solve the given task in a feasible time. In such a scenario, it would be desirable to just add more computation power to finish said task quicker. However, even if the given task permits parallelization, which is generally not obvious, distributing a problem among multiple machines, or similarly processing cores, is not trivial. For many problems a large administrative and communicative overhead aggravates the effort to parallelize.
@@ -125,17 +125,17 @@ In this section, some models for parallel and distributed computation are descri
 \subsection{MapReduce}
 MapReduce is a programming model for distributed computation of large sets of data on clusters of processing cores and usually multiple machines. Google introduced the MapReduce model in 2003 and used it a few years before announcing 2014 to switch to a less restrictive framework \cite{dean2008mapreduce}.
 
-The MapReduce process consists of three phases, \emph{Map}, \emph{Shuffle}, and \emph{Reduce}. The shuffle phase is usually provided by an implementing framework, both other phases are to be implemented by a user. Let the input data set be $C$, with identifiers $I$. More specifically this means that
+The MapReduce process consists of three phases, \emph{Map}, \emph{Shuffle}, and \emph{Reduce}. The shuffle phase is usually provided by an implementing framework, both other phases are to be implemented by a user. Let the input data set be $C$, with identifiers $I$. More specifically this means that the following holds:
 
 \[\forall{}c\in{}C:\exists!{}i\in{}I:i\text{ is associated with }c.\]
 Furthermore let $K$ be a set of keys and $V$ a set of intermediate values. Then the map function maps the input data with the associated identifier to a list of key-value pairs:
 
 \[\text{map}:I\times{}C \rightarrow{} (K\times{}V)^*\]
-Then the reduce function reduces a key and a list of all associated intermediate values to a single intermediate value:
+Then the \lstinline|reduce| function reduces a key and a list of all associated intermediate values to a single intermediate value:
 
 \[\text{reduce}: K\times{}V^*\rightarrow{}K\times{}V\]
 
-The reduce function is often described with a range of just $V$, because it never changes its parameter of $K$ and just passes it through. After all value lists have been reduced to contain only a single value $v\in{}V$, they form the final output $(K\times{}V)^*$.
+The \lstinline|reduce| function is often described with a range of just $V$, because it never changes its parameter of $K$ and just passes it through. After all value lists have been reduced to contain only a single value $v\in{}V$, they form the final output $(K\times{}V)^*$.
 
 The canonical example for this model is the problem of counting the number of occurrences for each word in large documents or even larger corpora of documents \cite{dean2008mapreduce}. Recall that for given input documents $C$ and corresponding identifiers $I$, which might be filenames or \URL{}s, one expects a list of key-value pairs containing $k\in{}K$, an identifier for a single word (likely the word itself), and $v\in{}V$ an integer value describing the words occurrences. Figure~\ref{lst:mapreduce} shows an example implementation of said behavior. Notice that the pseudocode class \lstinline|Word| does refer to a substring containing a single word and not the unit of data.
 
