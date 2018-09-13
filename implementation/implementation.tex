@@ -18,13 +18,70 @@ Framework schematisch in Netzwerksicht (Also welchen Weg Dokumente so in meinem 
 
 \section{Implementation}
 
+The framework presented here consists of several classes that implement different tasks. The frameworks main class \lstinline|SharedUimaProcessor| delegates all work to the corresponding classes. One complete execution of the framework, say an analysis of one corpus of documents, contains several steps to make. First, the framework must be instantiated. This is done by the actual user. They then order the instance of \lstinline|SharedUimaProcessor| to process a pipeline according to the output of a given collection reader. To accomplish this, the framework has to read the collection, wrap documents into \cas{} objects and send them along with the serialized pipeline description to its workers. After the analysis part is complete, the \cas{} objects get sent back where they are wrapped into a \lstinline|AnalysisResult| object to get access. 
+\begin{figure}[!htb]
+	\centering
+	\resizebox{0.8\linewidth}{!}{\small\input{img/activity-diagram.pdf_tex}}
+	\caption[An UML activity diagram of the CAS distribution process.]{An \uml{} activity diagram of the \cas{} distribution process.}
+	\label{fig:sup_act}
+\end{figure}
+
+Figure~\ref{fig:sup_act} shows the flow of documents in a \uml{} activity diagram. After getting read its wrapped inside a \cas{} and distributed among worker nodes. There the \cas{} are processed and then sent back. The following sections will describe these steps in detail.
+
+\subsection{Initialization}
+\label{sec:init}
+The initialization of the framework consists of two parts. First, since it depends on a running \spark{} infrastructure, one of such must be installed. Estimating the performance of algorithms on \spark{} clusters is possible, but hard \cite{wang2015performance,gopalani2015comparing}, especially because it heavily depends on the actual code being processed. Since both, \uima{} and the framework presented here provide the capability to process documents with arbitrary Java code, no assessment can be given here. By the architecture of the framework the number of usable machines are capped by the number of documents. However, since the corpus to process is usually large, especially in a situation when utilizing a scaling framework is necessary, this poses no sensible limitation. Another trivial bound is a minimum number of machines, since a single machine would process all \cas{} faster on a native \uima{} instance than a \spark{} cluster containing only one worker could. This is because a \spark{} cluster still has to administrate its only worker. The \cas{} has to be serialized and deserialized twice. The local \uima{} instance skips this.
+
+Given an \spark{} cluster, or more specific, the corresponding Java object \lstinline|JavaSparkContext|, the framework itself must be instantiated. This is useful to process on multiple \spark{} clusters within the same \jvm{}. The class \lstinline|SharedUimaProcessor| provides a constructor 
+% Math mode to put everything into one line. Text mode because ttfamily is invalid in math mode ._.
+\[ 
+\text{\lstinline|SharedUimaProcessor(JavaSparkContext, CompressionAlgorithm, CasSerialization, Logger)|}
+\]
+
+While the first parameter \lstinline|JavaSparkContext| was explained above as providing the necessary \api{} to \spark{} for the framework to use, the others have not yet been described. The \lstinline|CompressionAlgorithm| and \lstinline|CasSerialization| parameters are optional and may be null. They are implementations of interfaces provided by the framework to specify how \cas{} should be serialized and compressed for network transport. This is explained further in Section~\ref{sec:distribution}. The last of the constructors arguments is an implementation of the popular logging framework interface \lstinline|org.apache.log4j.Logger|\footurl{https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Logger.html}{2018-09-13}.
+
+\subsection{Transport}
+Depending on how \spark{} is configured, the user code either is executed directly on the master node (standalone) or on an unrelated machine that sends all necessary parameters to the master node (cluster mode). Usually the standalone mode is chosen only for development or trivial clusters of a single machine, because the underlying call to execute a function is synchronous in such a configuration, therefore the process is not monitorable until the call returns. Figure~\ref{fig:sup_schema} shows the whole process for a cluster mode configuration. Given the initialization described in Section~\ref{sec:init}, a collection reader would read documents into a collection of \cas{} objects. These are then serialized and compressed by algorithms also provided by the user. This is described further in Section~\ref{sec:distribution}. However, after successfully compressing the \cas{}, it gets sent to the \spark{} master node. Notice that this transmission is not necessary in standalone mode, since the \lstinline|SharedUimaProcessor| is then instantiated on the master node itself.
+\begin{figure}[htb]
+	\centering
+	\resizebox{\linewidth}{!}{\small\input{img/shared-uima-processor-schema.pdf_tex}}
+	\caption[A schematic for the Shared UIMA Processor in cluster mode.]{A schematic for the Shared \uima{} Processor in cluster mode.}
+	\label{fig:sup_schema}
+\end{figure}
+Not only the \cas{} are needed to analyze the documents but also the analysis algorithm itself. Analysis Engines, however, are not serializable by Java, since they do not implement the required interface. This is why the framework does not accept instantiated pipelines in form of an aggregate \lstinline|AnalysisEngine|, but only non-instantiated pipelines as \lstinline|AnalysisEngineDescription|, which implements the \lstinline|Serializable| interface. The \lstinline|AnalysisEngineDescription| itself can not be executed but can be used to instantiate the corresponding \anen{}. This happens on all worker node simultaneously and is combined with a non-trivial amount of computation time, since authors of Analysis Engines are encouraged to load data on the actual instantiation. \marginnote{source?}Many \nlp{} related algorithms need trained models or dictionaries that are relatively large. Both, \uima{} and \spark{} provide broadcast read-only variables to load such larger models only once, possibly saving on network and computation resources.
+
+\subsection{Process}
+As shown in Figure~\ref{fig:sup_schema}, one can see that a single pipeline is deployed per worker node, or more specifically per \jvm{}. This is important to avoid a limitation of \uima{}s generic nature. Since \anens{} consist of arbitrary code, they are generically not thread-safe. To meet the condition not to restrict any \uima{} capabilities, the framework must not pose any restrictions on the Analysis Engines, which includes a guarantee for thread-safety. Instantiating exactly one pipeline per \jvm{} circumvents the problem for the most part, as even static variables accessed by one instance are invisible to other instances. It is to mention that threading issues can still be encountered when accessing external data. The other way such problems may occur is when deploying an aggregate Analysis Engine containing a delegate \anen{} multiple times. In such a case a custom flow controller could be provided to execute both \anens{} simultaneously. However, this is also a problem in \uima{}s original architecture and can be easily avoided by just using the default Flow Controller or by not adding the same Analysis Engine multiple times in one pipeline.
+
+\subsection{Result}
+
+
+% Don't ever touch the magic that happens here!
+\begin{figure}[htb]
+	\centering
+	\resizebox{\linewidth}{!}{\footnotesize\input{img/class-diagram.pdf_tex}}
+	\caption[An UML class diagram of the frameworks result classes.]{An \uml{} class diagram of the frameworks result classes.}
+	\label{fig:sup_results}
+\end{figure}
+
+
 
 \section{Data Distribution}
+\label{sec:distribution}
 Since all the input data, in form of documents, and output data, in form of analysis results, must be transmitted over a network, be it virtual or real, the serialization of larger Java objects play a role in performance. Since both, the input and the output, are stored inside a \cas{} object it suffices to find a suitable serialization algorithm for those. However, finding an optimal algorithm is not trivial and usually even depends on the input data. Larger documents produce larger \cas{}, which in turn need a longer time to be deployed to the corresponding \spark{} workers. However, small documents still are no guarantee for small \cas{} sizes, since analysis results can be of arbitrary size and number, depending on the \uima{} pipeline. 
 
 Furthermore it can be useful to compress serialized data, depending on the network setup and the serialization algorithm. Most native \uima{} serializations produce \xml{} files, which are very verbose and well compressible. Compression algorithms specifically designed for \xml{} files achieve packing ratios of up to 80\,\% \cite{girardot2005system,min2003xpress,sakr2009xml}. However, such algorithms often come at the price of a relatively high runtime. This is especially undesirable if the transmitted data is small or the serialization sparse and the expected compression ratio is low.
 
-Since an optimal choice for both, serialization and compression, is not possible for the general case the framework exposes two interfaces, namely \lstinline|CasSerialization| and \lstinline|CompressionAlgorithm|.
+Since an optimal choice for both, serialization and compression, is not possible for the general case the framework exposes two interfaces, namely \lstinline|CasSerialization| and \lstinline|CompressionAlgorithm|. Figure~\ref{fig:interfaces} shows the relationship between the framework main class \lstinline|SharedUimaProcessor| and both interfaces. Additionally, two implementations that are already provided by the framework are shown in the model.
+
+
+% Don't ever touch the magic that happens here!
+\begin{figure}[htb]
+	\centering
+	\resizebox{\linewidth}{!}{\small\input{img/shared-uima-processor-uml.pdf_tex}}
+	\caption[An UML class diagram of the serialization and compression interfaces.]{An \uml{} class diagram of the serialization and compression interfaces.}
+	\label{fig:interfaces}
+\end{figure}
 \subsection{Serialization}
 In \cite{epstein2012making} Epstein et al. explain how serialization of \cas{} was an important bottleneck and a problem to solve. They configured \uimaas{} in several ways to serialize only the parts of the \cas{} object that are needed for further analysis. Obviously this can not be done in the general case when the underlying analysis algorithms are unknown, which is why the framework takes an instance of \lstinline|CasSerialization| as an optional parameter.
 
@@ -36,7 +93,7 @@ public CAS deserialize(byte[] data, CAS cas);
 
 While the signature of the \lstinline|serialize| method is intuitive, this does not immediately apply to the \lstinline|deserialize| function. Here, a previously created \cas{} object is given as a parameter for two reasons. First, \uima{} allows for the configuration of a custom \lstinline|CasInitializer|, which can alter the \cas{} object immediately after creation. Although the usage of \lstinline|CasInitializers| has been deprecated since at least 2006, it is still a feature of \uima{} and must therefore be taken care of \cite{uimacpe}. By creating a new \cas{} on the target \jvm{}, the framework first executes the \lstinline|CasInitializers| and then passes the resulting \cas{} to the \lstinline|deserialize| function. The second reasons for this additional parameter is to pass the current \uima{} type system. The serialized data might include annotations of types that are unknown to the native \uima{} type system and therefore must be defined before deserialization. Although a parameter \lstinline|TypeSystem| would have been sufficed, the first reason implies the requirement of a complete \cas{} parameter. Since the created \cas{} already includes the full type system description, available by \lstinline|cas.getTypeSystem()|, the framework abstains from passing another parameter to the \lstinline|deserialize| method. If \lstinline|CasInitializer|s get removed from \uima{}, this might be a feasible change in the future.
 
-The framework already ships with two implementations of the \lstinline|CasSerialization| interface, namely \lstinline|XmiCasSerialization| and \lstinline|UimaCasSerialization|. The \lstinline|XmiCasSerialization| creates complete \xmi{} files, containing the \sofa{}, all analysis results and even the used type system description. To accomplish this, it uses the \uima{} \lstinline|XmiCasSerializer| class. Thus, the \lstinline|XmiCasSerialization| implementation of \lstinline|CasSerialization| acts as a mere wrapper. The second serialization algorithm \lstinline|UimaCasSerialization| also just wraps around the native \uima{} class \lstinline|Serializer|, which is the same serialization algorithm \uimaas{} uses to distribute and retrieve \cas{} objects.
+The framework already ships with two implementations of the \lstinline|CasSerialization| interface, namely \lstinline|XmiCasSerialization| and \lstinline|UimaCasSerialization|. The \lstinline|XmiCasSerialization| creates complete \xmi{} files, containing the \sofa{}, all analysis results and even the used type system description. To accomplish this, it uses the \uima{} \lstinline|XmiCasSerializer| class. Thus, the \lstinline|XmiCasSerialization| implementation of \lstinline|CasSerialization| acts as a mere wrapper. The second serialization algorithm \lstinline|UimaCasSerialization| also just wraps around the native \uima{} class \lstinline|Serializer|, which is the same serialization algorithm \uimaas{} uses to distribute and retrieve \cas{} objects. As shown in Figure~\ref{fig:interfaces}, both \lstinline|XmiCasSerialization| and \lstinline|UimaSerialization| are also implementing a singleton pattern, because no instance dependent information must be stored for either of them. However, one could implement a \lstinline|CasSerialization| that stores context dependent information, for example the underlying type system.
 
 \subsection{Compression}
 Since the compression results are very dependent on the use case, data size and serialization algorithm, the framework provides the user with a \lstinline|CompressionAlgorithm| interface. An implementation of said interface exposes two methods with signatures as shown in Listing~\ref{lst:cascompression}.
@@ -46,5 +103,5 @@ public byte[] decompress(final byte[] input);
 \end{lstlisting}
 Completely abstracted from any \uima{} concept, this interface simply expects two functions, \lstinline|compress| and \lstinline|uncompress| to behave such that for every input \lstinline|byte[] X| holds that \lstinline|X = decompress(compress(X))|. While this is the only technical requirement for this interface, it is usually desired to have \lstinline+|X| > |compress(X)|+. Since both methods act \uima{} unaware, reducing the object size by omitting parts of the \cas{} is not possible without deserializing the \cas{} first, a step that is defined in the \lstinline|CasSerialization| interface and not accessible from this context. 
 
-The framework ships with two implementations of the \lstinline|CompressionAlgorithm| interface. If defaults to the \lstinline|NoCompression| class, simply implementing the identity with \lstinline|X = compress(X)|, effectively disabling any kind of compression. This is useful if network delay is negligible, especially in virtual networks inside a single machine. A compression algorithm would need computation time to process all transmitted \cas{}, while saving only a minimum of transfer time. Secondly, the class \lstinline|ZLib| implements the DEFLATE compression, which is a general purpose lossless compression algorithm, commonly used in ZIP files.
+The framework ships with two implementations of the \lstinline|CompressionAlgorithm| interface. If defaults to the \lstinline|NoCompression| class, simply implementing the identity with \lstinline|X = compress(X)|, effectively disabling any kind of compression. This is useful if network delay is negligible, especially in virtual networks inside a single machine or on low latency environments. A compression algorithm would need computation time to process all transmitted \cas{}, while saving only a minimum of transfer time. Secondly, the class \lstinline|ZLib| implements the DEFLATE compression, which is a general purpose lossless compression algorithm, commonly used in ZIP files. As seen in Figure~\ref{fig:interfaces} both classes implement the singleton pattern, because no instance data has to be stored for either compression algorithm. However, one could implement an algorithm that stored such information, such as a dictionary.
 
