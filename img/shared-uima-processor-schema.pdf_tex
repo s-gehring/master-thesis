@@ -1,0 +1,123 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'shared-uima-processor-schema.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{531.75bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.77574048)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{shared-uima-processor-schema.pdf}}%
+    \put(0.19181946,0.72910506){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Shared UIMA Processor\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{shared-uima-processor-schema.pdf}}%
+    \put(0.84931324,0.15484636){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Master\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{shared-uima-processor-schema.pdf}}%
+    \put(0.20927362,0.08947177){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Worker\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{shared-uima-processor-schema.pdf}}%
+    \put(0.61128818,0.07022013){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Compression\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{shared-uima-processor-schema.pdf}}%
+    \put(0.45513597,0.07022013){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Serialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{shared-uima-processor-schema.pdf}}%
+    \put(0.19181946,0.30456345){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Spark\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{shared-uima-processor-schema.pdf}}%
+    \put(0.30981411,0.07022013){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Analysis\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{shared-uima-processor-schema.pdf}}%
+    \put(0.20927362,0.17409801){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Worker\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{shared-uima-processor-schema.pdf}}%
+    \put(0.61128818,0.15484636){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Compression\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{shared-uima-processor-schema.pdf}}%
+    \put(0.45513597,0.15484636){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Serialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{shared-uima-processor-schema.pdf}}%
+    \put(0.30981411,0.15484636){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Analysis\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{shared-uima-processor-schema.pdf}}%
+    \put(0.20927362,0.25872424){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Worker\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{shared-uima-processor-schema.pdf}}%
+    \put(0.61128818,0.2394726){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Compression\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{shared-uima-processor-schema.pdf}}%
+    \put(0.45513597,0.2394726){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Serialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{shared-uima-processor-schema.pdf}}%
+    \put(0.30981411,0.2394726){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Analysis\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{shared-uima-processor-schema.pdf}}%
+    \put(0.66735306,0.41084072){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Compression\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{shared-uima-processor-schema.pdf}}%
+    \put(0.67110918,0.48136258){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Serialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{shared-uima-processor-schema.pdf}}%
+    \put(0.41206392,0.56930421){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Collection\end{tabular}}}}%
+    \put(0.42146867,0.54856909){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Reader\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{shared-uima-processor-schema.pdf}}%
+    \put(0.0441134,0.42937966){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}User\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{shared-uima-processor-schema.pdf}}%
+    \put(0.69980689,0.55893667){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}CAS\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{shared-uima-processor-schema.pdf}}%
+    \put(0.47338488,0.64356291){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Analysis Engine Description\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{shared-uima-processor-schema.pdf}}%
+    \put(0.8380145,0.49173021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Native Java\end{tabular}}}}%
+    \put(0.83613033,0.47099504){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Serialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{shared-uima-processor-schema.pdf}}%
+    \put(0.4031261,0.49173021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Serialization\end{tabular}}}}%
+    \put(0.41348125,0.47099504){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Algorithm\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{shared-uima-processor-schema.pdf}}%
+    \put(0.39936999,0.42120835){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Compression\end{tabular}}}}%
+    \put(0.41348125,0.40047318){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Algorithm\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{shared-uima-processor-schema.pdf}}%
+    \put(0.56698337,0.57494596){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}reads\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{shared-uima-processor-schema.pdf}}%
+    \put(0.21754484,0.57494596){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Parameter\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=27]{shared-uima-processor-schema.pdf}}%
+    \put(0.21754484,0.6595722){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Parameter\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=28]{shared-uima-processor-schema.pdf}}%
+    \put(0.21754484,0.49737196){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Parameter\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=29]{shared-uima-processor-schema.pdf}}%
+    \put(0.5512289,0.49737196){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}provides\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=30]{shared-uima-processor-schema.pdf}}%
+    \put(0.21754484,0.4268501){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Parameter\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=31]{shared-uima-processor-schema.pdf}}%
+    \put(0.5512289,0.4268501){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}provides\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
