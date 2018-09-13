@@ -1,0 +1,124 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'class-diagram.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{438bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.32876712)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{class-diagram.pdf}}%
+    \put(0.30136986,1.00256849){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{AnalysisResult}\end{tabular}}}}%
+    \put(0.30136986,0.97517123){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from distributed)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{class-diagram.pdf}}%
+    \put(0.0385274,0.93578767){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}result: JavaRDD<SerializedCAS>\end{tabular}}}}%
+    \put(0.37756849,0.93578767){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{read-only}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{class-diagram.pdf}}%
+    \put(0.0385274,0.89982877){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}getNumPartitions(): Integer\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{class-diagram.pdf}}%
+    \put(0.0385274,0.86558219){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}collect(): org.apache.uima.cas.CAS[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{class-diagram.pdf}}%
+    \put(0.0385274,0.83133562){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}collectPartitions(Integer[*]): org.apache.uima.cas.CAS[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{class-diagram.pdf}}%
+    \put(0.0385274,0.79708904){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}count(): Long\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{class-diagram.pdf}}%
+    \put(0.0385274,0.76284247){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}saveAsXmi(filepath: String)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{class-diagram.pdf}}%
+    \put(0.42037671,1.29537671){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{SharedUimaProcessor}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{class-diagram.pdf}}%
+    \put(0.0385274,1.25599315){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}casCompression: CompressionAlgorithm\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{class-diagram.pdf}}%
+    \put(0.0385274,1.22174658){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}casSerialization: CasSerialization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{class-diagram.pdf}}%
+    \put(0.0385274,1.18578767){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}SharedUimaProcessor(sparkConfiguration, compression, serialization, logger)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{class-diagram.pdf}}%
+    \put(0.0385274,1.1515411){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}process(readerDescription, pipelineDescription, partitionNum): AnalysisResult\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{class-diagram.pdf}}%
+    \put(0.1489726,0.62585616){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{« datatype »}\end{tabular}}}}%
+    \put(0.1489726,0.59674658){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{JavaRDD<SerializedCAS>}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{class-diagram.pdf}}%
+    \put(0.79623288,0.62414384){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{« datatype »}\end{tabular}}}}%
+    \put(0.79623288,0.59503425){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{List<SerializedCAS>}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{class-diagram.pdf}}%
+    \put(0.5,0.45462329){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{SerializedCAS}\end{tabular}}}}%
+    \put(0.5,0.42722603){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from distributed)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{class-diagram.pdf}}%
+    \put(0.0385274,0.38784247){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}content: Byte[]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{class-diagram.pdf}}%
+    \put(0.0385274,0.35188356){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}size(): Integer\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{class-diagram.pdf}}%
+    \put(0.0385274,0.31763699){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}SerializedCAS(org.apache.uima.cas.CAS, CompressionAlgorithm[0..1], CasSerialization[0..1])\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{class-diagram.pdf}}%
+    \put(0.0385274,0.28339041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}populateCAS(org.apache.uima.cas.CAS[0..1])\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{class-diagram.pdf}}%
+    \put(0.0385274,0.24914384){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}getCAS(pipelineDescription): org.apache.uima.cas.CAS[0..1]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{class-diagram.pdf}}%
+    \put(0.0385274,0.21489726){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}getSerializedContent(): Byte[*]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{class-diagram.pdf}}%
+    \put(0.11044521,0.10702055){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{« Interface »}\end{tabular}}}}%
+    \put(0.11044521,0.07791096){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{\textit{java.io.Serializable}}\end{tabular}}}}%
+    \put(0.11044521,0.0505137){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from external library)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{class-diagram.pdf}}%
+    \put(0.79537671,0.0864726){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{« datatype »}\end{tabular}}}}%
+    \put(0.79537671,0.05736301){\color[rgb]{0.01176471,0.21176471,0.3372549}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{org.apache.uima.cas.CAS}\end{tabular}}}}%
+    \put(0.79537671,0.02996575){\color[rgb]{0.41176471,0.41176471,0.41176471}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(from external library)\end{tabular}}}}%
+    \put(0.07619863,0.66523973){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}delegates to\end{tabular}}}}%
+    \put(0.36558219,0.59332192){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}provided by\end{tabular}}}}%
+    \put(0.58133562,0.62928082){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}logically contains\end{tabular}}}}%
+    \put(0.66010274,0.59332192){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0.8484589,0.49571918){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}contains\end{tabular}}}}%
+    \put(0.77996575,0.49571918){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}*\end{tabular}}}}%
+    \put(0.34674658,1.04366438){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}returns\end{tabular}}}}%
+    \put(0.28339041,1.04366438){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0.87928082,0.12585616){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}deserializes to\end{tabular}}}}%
+    \put(0.82619863,0.16695205){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0.77825342,0.12585616){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{class-diagram.pdf}}%
+  \end{picture}%
+\endgroup%
