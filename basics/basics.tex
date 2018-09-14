@@ -118,6 +118,7 @@ Since the \cas{} object contains everything, the \sofa{}, all analysis results, 
 As most parts of the native \uima{} framework, \uimaas{} is configured by writing an \xml{} descriptor, containing all the necessary data for deployment. A dynamic creation of said descriptor files is currently not possible with \uimafit{}, but is provided by Leo, described in Section~\ref{ssec:leo}.
 
 \section{Distributed Computation}
+\label{sec:dist_comp}
 \marginnote{Bisschen history? Eigentlich langweilig, ich erkläre hier schon extrem simple Dinge.}When handling large sets of data, a single machine may not be sufficient to solve the given task in a feasible time. In such a scenario, it would be desirable to just add more computation power to finish said task quicker. However, even if the given task permits parallelization, which is generally not obvious, distributing a problem among multiple machines, or similarly processing cores, is not trivial. For many problems a large administrative and communicative overhead aggravates the effort to parallelize.
 
 In this section, some models for parallel and distributed computation are describes. Those concepts aim to generalize the problem of distributing a task while at the same time try not to be too restrictive in their interface. 
@@ -175,10 +176,27 @@ Hier im Grunde alles was es an "Vorarbeiten" bzw. konkurrierende Ansätze gibt.
 
 \subsection{Leo}
 \label{ssec:leo}
-Leo ist für UIMA-AS was UIMAfit für UIMA ist. Leider leidet Leo unter einer sehr schwachen und verletzlichen Programmierung. Dies zeigen zum Einen die Inkompabilitäten zu UIMAfit, zum Anderen aber auch statische Code Analyse. Alles in allem aber ein brauchbares Tool und mein Go-To, sollte ich UIMA-AS noch einmal aufsetzen.
+The Leo framework was developed by \vinci{} to allow for the easy deployment of annotators in an \uimaas{} environment \cite{leo}. Since it wraps around most concepts of \uima{} and \uimaas{}, its architecture closely resembles \uimaas{}. This can be seen in Figure~\ref{fig:leo}. Given a number of instances of \lstinline|LeoAEDescriptor|, which are compatible with the native \uima{} Analysis Engine, Leo is able to automatically write an \uimaas{} deployment descriptor file and use it to deploy a \lstinline|Service| instance. This also is just a wrapper around \uimaas{} native service, which tries to register to a given broker implementation. Leo does not provide a broker implementation by its own, but depends on an existing \uimaas{} installation, which in turn provides ActiveMQ, as described further in Section~\ref{ssec:uimaas}.
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=1\textwidth]{leo}
+	\caption[The Leo architecture wrapping around UIMA-AS.]{The Leo architecture wrapping around \uimaas{} \cite{leo}}
+	\label{fig:leo}
+\end{figure}
+Given such an instance of a broker-service architecture, Leo is now able to perform requests to said broker. The Leo \lstinline|Client| class provides access to the native \uimaas{} capability of querying the services for analysis results. For this, Leo utilizes the class \lstinline|LeoCollectionReader|, which also is just a wrapper around the native \uima{} Collection Readers and can be easily converted to one and vice versa.
+
+The Leo source code repository\footurl{https://github.com/department-of-veterans-affairs/Leo}{2018-09-14} shows that the last change was in January 2018, without providing any comments or history\footurl{https://github.com/department-of-veterans-affairs/Leo/commit/038f7d5c542fa564c2997403769943ac47638692}{2018-09-14}. This, and the fact that the project only has four contributors and no pull request as of the time of writing shows that the Leo framework project is not well-maintained.
+
+A static code analysis with FindBugs\footurl{http://findbugs.sourceforge.net/}{2018-09-14} on the current source code\footnote{Commit 038f7d5c542fa564c2997403769943ac47638692 on 2018-09-14} shows 29 potential bugs, of which seven are rated as `scary' by FindBugs. Another code analysis tool, SonarLint\footurl{https://www.sonarlint.org/}{2018-09-14} which also checks the coding style found a total of 626 bugs, vulnerabilities and code smells. 
 
 \subsection{v3NLP}
-v3NLP ist auch ein scaling framework für NLP, was auf UIMA aufbaut. Es wurde damals speziell für cTAKES und MetaMap programmiert.
+The framework v3NLP was first introduced in 2011 by Divita and Trietler in \cite{divita2011finding} as a successor to HITEx\footnote{Health Information Text Extraction}. Both, HITEx and v3NLP were initially built on top of the Gate framework but switched to \uima{} since. v3NLP provides capabilities to process \nlp{} tasks especially in the medical field. It is therefore heavily influenced by the context of a medical environment. It provides 34 pre-composed pipelines, all related to clinical text analysis. However, it enforces the use of the CHIR\footnote{Consortium for Healthcare Informatics Research} Common Model, which is an ontology of labels from already existing \nlp{} systems. This model is encoded in a default type system the framework is using and it can be extended at will. This is supposed to ensure interoperability between different \nlp{} components that were developed for v3NLP. Notice that this poses a restriction on the user of the framework, since they are forced to always include this type system \cite{divita2016v3nlp}. The framework also provides scaling capabilities that internally utilize the native \uimaas{} scalability.
+
+While the v3NLP framework provides many functionalities for \nlp{} research in the medical context, it is a large project in respect to \uima{}, \uimaas{} and Leo (described in Section~\ref{ssec:leo}). All the v3NLP git repositories combined span 23.3\,GB of content and contain about 1.8\,million lines of Java code in the latest commit alone. Thus it is a heavyweight tool, which is used best in a medical environment where as many capabilities as possible are actually used.
+
+At the time of writing, the last commit to the framework repository was on December 2017, nine months in the past. According to the v3NLP website\footurl{http://inlp.bmi.utah.edu/redmine/docs/v3nlp-framework/News.html}{2018-09-14} this is expected to be the very last commit.
+
+
 
 
 %In this chapter, we will cover the basics for the necessary technologies used throughout the evaluation. All of these are concrete implementations of more general concepts and may be exchanged for similar products. However, the following products were chosen, mainly because they are Open Source\footurl{https://svn.apache.org/viewvc/uima/}{2018-02-27}\footurl{https://github.com/docker}{2018-02-27}\footurl{https://github.com/apache/hadoop}{2018-02-27}\footurl{https://github.com/apache/spark}{2018-02-27}\footurl{https://github.com/apache/kafka}{2018-02-27} but also because of their popularity and relevance in the industry.
