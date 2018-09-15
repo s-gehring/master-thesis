@@ -167,12 +167,17 @@ Dean and Ghemawat found in \cite{dean2008mapreduce} that many real world applica
 
 \subsection{Resilient Distributed Datasets}
 
-Gibt nur Spark, was soll ich dazu noch sagen?
+\rdds{} provide an interface that are very similar to the native Java \lstinline|Collection|. They were initially developed in 2012 by Zaharia et al. in \cite{zaharia2012resilient} as a response to iterative algorithms being inefficient in current computing frameworks such as MapReduce.
 
-\marginnote{Ich bin sehr unzufrieden mit der related work in den Basics. Es passt hier absolut nicht rein. Ich werde das vermutlich bald wieder in das erste Kapitel Introduction schieben.}
+An \rdd{} can be created by either of two ways. First, stable data collections such as native Java \lstinline|Collection| instances or a number of files in a file system can be initialized as \rdds{}. The other way of creating is a deterministic operation on an already existing \rdd{}. These operations are called \emph{transformations} by Zaharia in \cite{zaharia2012resilient}. Since \rdds{} are immutable collections, calling such a transformation on an existing \rdd{} is the only way of obtaining the wanted resulting \rdd{}.
+
+Being immutable, \rdds{} allow to be materialized lazily. This means that the issued transformations are executed just in time, when a materialized form of the \rdd{} is necessary. This happens on actions like counting the number of objects in the \rdd{} or serializing it to a file. Before executing these transformations, an acyclic graph is built to represent the necessary transformations of computing said \rdd{}. Furthermore, \rdds{} are sliced into partitions, atomic pieces. These partitions can then be distributed among the clusters nodes and computed whenever necessary. For the distribution of said partitions, \spark{} utilizes the knowledge of the issued transformation to evaluate dependencies of resulting \rdds{} to their predecessor. This means for example, that a \lstinline|count| operation that follows a large amount of transformations does not necessarily force \spark{} to actually compute all these transformations. For example a transformation \lstinline|crossProduct| on data sets $X$ and $Y$ is guaranteed to result in a collection of size $|X|\cdot{}|Y|$. Materialization of $X\times{}Y$ is not necessary. This technique of lazy transformation provides a simple way of fault tolerance since only the \rdd{} lineage and not the complete materialized \rdd{} itself must be replicated among the different machines.
+
+The only current implementation of \rdds{} is Apache \spark{}, introduced along with \rdds{} in 2012 \cite{zaharia2012resilient}.
+
 \section{Related Work}
 \label{sec:related}
-Hier im Grunde alles was es an "Vorarbeiten" bzw. konkurrierende Ansätze gibt.
+Taking effort to scale \uima{} has been done numerous times. The most prominent result was the implementation of the question answering system Watson \cite{epstein2012making}. This approach used native \uimaas{}, although the engineers changed the \uimaas{} source code themselves. Other approaches that are trying to be generic solutions while not posing too many restrictions or being too intrusive into the native \uima{} concepts or even code, are Leo and v3NLP.
 
 \subsection{Leo}
 \label{ssec:leo}
