@@ -1,6 +1,6 @@
 \chapter{Evaluation}
 \label{ch:evaluation}
-In the following sections, the framework introduced in Chapter~\ref{ch:implementation} will be compared to existing \uima{} distribution approaches. For this reason, a sophisticated evaluation architecture was deployed on a virtual network, which is described in Section~\ref{sec:setup}. The comparison will follow along the metrics given in Section~\ref{sec:requirements} `\nameref{sec:requirements}'.
+In the following sections, the framework introduced in Chapter~\ref{ch:implementation} will be compared to existing \uima{} distribution approaches. For this reason, a sophisticated evaluation architecture was deployed on a virtual network, which is described in Section~\ref{sec:setup}. The comparison will follow along the metrics given in Section~\ref{sec:requirements}~`\nameref{sec:requirements}'.
 
 
 Was wir definitiv vergleichen können ist Extensibility und Maintainability, also weiche Metriken. Memory Consumption hab ich nicht mit geloggt, das empfand ich als zuviel Aufwand für zuwenig return. Hintergrund ist, dass sowohl UIMA-AS, als auch Spark nur kleinen Overhead haben. Wir reden hier von <1GB. Jede halbwegs erwachsene Pipeline, mit mindestens einem oder zwei Modellen übertrifft das. Somit bin ich grundsätzlich einfach davon ausgegangen, dass Speicher "genug" da ist, also nichts geswappt wird (und offensichtlich nichts in den OOM-Killer läuft). Ich denke das ist sinnvoll so. Hat man einen Rechner, auf dessen RAM die Pipeline, inklusive aller Modelle, passt, dann passt da auch noch Spark/UIMA-AS drauf. Passt die Pipeline nicht, hat man sowieso Pech.
@@ -8,25 +8,77 @@ Was wir definitiv vergleichen können ist Extensibility und Maintainability, als
 \section{Setup}
 \label{sec:setup}
 \marginnote{Daniel fragen was ich für Hardware hatte.}
+Setting up a testing and benchmarking environment for the framework given in Chapter~\ref{ch:implementation} and \uimaas{} is not trivial when accounting for comparability. This is because the given framework and \uimaas{} function fundamentally different from each other. The following descriptions for \docker{} architectures suggest a highly similar setup, but even the initialization of both systems differ in terms of concept. While the actual analysis code inside the aggregate \anen{} is provided at the \uimaas{} services inherently, this does not hold for a \spark{} cluster. Such a \spark{} cluster waits for tasks until one arrives and orders it to execute code according to a JAR file, whose \URL{} is given in a parameter. However, the same cluster can work on other problems as well, without reconfiguration and reinitialization. Different tasks can even be processed in parallel, since the \spark{} is not just usable by the frameworks \api{}.
+
+This concept is fundamentally different from \uimaas{}, where a service is bound to exactly one aggregate Analysis Engine and therefore one pipeline. If another \nlp{} algorithm has to be processed, another \uimaas{} service must be instantiated and registered to the broker, at another queue name. While the old services are still up, system resources for those can not be reallocated and idle until a \cas{} object for exactly this \anen{} is sent to the broker. 
+
+These two concepts both have their advantages and disadvantages. The way \spark{} allocates resources for tasks makes it more flexible to use. Different pipelines can easily be processed without making changes to the computation cluster. A cluster of \uimaas{} services would need heavy reconfiguration for such a case. However, since \uimaas{} services do not discard their resources after finishing the current task, a pipeline does not need to be reinitialized if another \cas{} should be analyzed. Since \nlp{} algorithms commonly depend on large dictionaries or language models, this saves on loading time and especially disk I/O. A \spark{} cluster would immediately forget the context of the current pipeline and would have to reinitialize it.
+
+This also comes into play when evaluating the running time of both concepts. Given a more sophisticated pipeline and a ready-to-use \spark{} cluster on one hand and a number of \uimaas{} instances on the other hand, the pipelines in the \uimaas{} services would have already been initialized, while the pipelines in the \spark{} architecture are initialized on-the-fly. This holds not true for \anens{} that load their resources lazily. However, no such assumption can be made in general.
+
+To evaluate both frameworks, and the single threaded approach to get a sense of the administrative workload, a cluster of multiple computers were needed. To simulate a network of machines, \docker{} was chosen as a virtualization concept for multiple reasons. First, \docker{}s resource footprint is way smaller than one of a virtual machine, therefore more resources can be allocated for the actual benchmark. Secondly, a docker image is completely reproducible. While this can also be achieved with configuration management tools like Chef\footurl{https://www.chef.io/chef/}{2018-09-16}, Puppet\footurl{https://puppet.com/de}{2018-09-16} or Ansible\footurl{https://www.ansible.com/}{2018-09-16}, defining a Dockerfile allows for easy reproduction and configuration. 
+
+Notice that network transport delay between the various components are trivial in a simulated network without any artificial delay. For this reason, compression was disabled for the framework presented in this thesis.
+\subsection{Apache Spark}
+\label{ssec:spark}
+In Figure~\ref{fig:arch-spark}, one can see the \docker{} architecture used in the evaluation. A custom created image for \spark{} was used for both, the master and the worker nodes. This image is based on OpenJDK and will be available as described in Section~\ref{sec:availability}. The \spark{} worker nodes can be scaled at will by a simple \docker{} parameter. Both containers, \emph{jar-provider} and \emph{document-provider} are  instances of nginx\footurl{https://www.nginx.com/}{2018-09-16} HTTP servers. The document provider simply provides access to the complete corpus of documents via ordinary HTTP GET requests. These documents could have also been simply copied into the \emph{submitter} image, however an HTTP provider server for the document corpus was chosen to equalize I/O delay both, \uimaas{} and \spark{} would have. This approach is also easily modifiable since the documents provided by the nginx server are a volume, pointing to a persistent folder inside the host file system.
+\begin{figure}[tbh]
+	\centering
+	\input{img/docker-architecture-spark.pdf_tex}
+	\caption[The evaluation architecture with Spark inside a Docker environment.]{The evaluation architecture with \spark{} inside a \docker{} environment.}
+	\label{fig:arch-spark}
+\end{figure}
+Similarly, the jar-provider provides the needed JAR files for \spark{} worker nodes. As described above, a \spark{} cluster is a general computation cluster and not pipeline-specific. Thus, to execute code of an analysis engine, the corresponding JAR file must be provided to the whole cluster. While this can also be achieved by mounting a persistent folder inside each worker and the master node, it seemed a cleaner solution to expose the JAR file by another nginx HTTP server. This is closer to real world applications, because a JAR file will most likely not first be copied to each worker nodes file system before executing, especially since it is not trivial to predict which workers are actually processing the given tasks and at what time. In this architecture, any worker can access the JAR file at any point of its lifetime.
+
+The submitter container is also an instance of the \spark{} image described above, but only issues the initial command to the cluster. \spark{} works in one of two modes. First, the standalone mode would let the submitter container also download the JAR file and execute the code until a Java command issues the cluster to work on some tasks in a distributed manner. In cluster mode, a worker node would be allocated by the clusters master to execute the Java code. When a Java command orders \spark{} to parallelize some work, more resources are allocated for said tasks. However, the initial worker node would be unavailable for this phase. Since the architecture is more comparable to the \uimaas{} architecture in the standalone mode, it is chosen for the evaluation.
+\subsection{UIMA-AS}
+The \docker{} architecture in the evaluation setup for \uimaas{} is very similar to the one for \spark{}. In Figure~\ref{fig:arch-uimaas}, the deployment composition is shown. For the \uimaas{} services, the underlying ApacheMQ broker and the submitter container, an \uimaas{} \docker{} image was composed. As with the \spark{} image described in Section~\ref{ssec:spark}, it is based on an OpenJDK image and will be available to the public according to Section~\ref{sec:availability}.
+\begin{figure}[htb]
+	\centering
+	\input{img/docker-architecture-uimaas.pdf_tex}
+	\caption[The evaluation architecture with UIMA-AS inside a Docker environment.]{The evaluation architecture with \uimaas{} inside a \docker{} environment.}
+	\label{fig:arch-uimaas}
+\end{figure}
+First, the \uimaas{} services register themselves at the given broker instance. At the same time the services initialize their corresponding pipeline. This happens in contrast to \spark{}, where the given cluster is completely \uima{} agnostic and initializes the pipelines when they are needed.
+
+In the same way as in Section~\ref{ssec:spark}, the submitter reads the documents per HTTP from the document-provider, which is an instance of the identical image used in the \spark{} evaluation. Notice that even the logic of reading the corpus is identical, since it is wrapped inside a \lstinline|CollectionReader|, which produces \cas{} object that can be processed further. The \cas{} are then sent to the broker and distributed among the services. An important distinction to make is, that in the \uimaas{} concept, the \cas{} object must return to the submitter. In contrast, the concept of the framework built on top of spark does allow the collection of the resulting \cas{}, but discourages it, since it may be a bottleneck on large corpora or large pipelines providing many analysis results.
 
 
+\section{Results}
+The evaluation setup given above was used to analyze a corpus of 3036 text files, taken from the larger dataset of the project Gutenberg\footurl{http://www.gutenberg.org/}{2018-09-16} \cite{lahiri:2014:SRW}. This subset was cleaned by metadata, license information and transcribers notes and were therefore seen as more realistic input data than books containing such artifacts. Furthermore books were chosen as analysis items, because they contain large amount of natural language and may revolve around very different domains. This can be important for the performance of algorithms that solve specific \nlp{} tasks, for example Named Entity Recognition.
 
-Auf jeden Fall den gesamten Versuchsaufbau beschreiben, inkl. allem Docker-Gedöhns. 
-Bilder:
+Since the performance is most likely very dependent on the actual analysis to run, or more specifically the given pipeline, three different pipelines were used to compare \uimaas{} and \spark{}:
 \begin{itemize}
-	\item Versuchsaufbau UIMA-AS (evtl. inkl. Dockercontainern? Oder eher davon wegabstrahiert?)
-	\item Versuchsaufbau Spark (s.o.)
-	\item Framework in HDFS-Umgebung
-	\item Single-Threaded in HDFS-Umgebung
-	\item UIMA-AS in HDFS-Umgebung (hey, hier kann mein Framework punkten, da mach ich ein Bild zu :D)
+	\item{}Parsing
+	\begin{enumerate}
+		\item{}\emph{Language Setter}: Sets the \cas{} language to English. 
+		\item{}\emph{Stanford Segmenter \cite{manning-EtAl:2014:P14-5}}: Segments the text into tokens for further processing.
+		\item{}\emph{Stanford PoS Tagger \cite{manning-EtAl:2014:P14-5}}: Finds the parts-of-speech for all identified tokens \cite{toutanova2003feature}.
+		\item{}\emph{Malt Parser\cite{Nivre05maltparser:a}}: Locates the grammatical components of sentences.
+	\end{enumerate}
+	\item{}Mixed Named Entity Recognition
+	\begin{enumerate}
+		\item{}\emph{Language Setter}: Sets the \cas{} language to English. 
+		\item{}\emph{OpenNLP Segmenter \cite{opennlp}}: Segments the text into tokens for further processing.
+		\item{}\emph{Mate PoS Tagger \cite{bohnet2010very}}: Finds the parts-of-speech for all identified tokens.
+		\item{}\emph{ClearNLP Lemmatizer \cite{manning-EtAl:2014:P14-5}}: Generates the base forms for all identified tokens.
+		\item{}\emph{Berkeley Parser\cite{petrov2006learning,petrov2007improved}}: Locates the grammatical components of sentences.
+		\item{}\emph{Stanford Named Entity Recognizer \cite{manning-EtAl:2014:P14-5}}: Finds occurrences of the entities `Person', `Location', `Organization' and `Misc' and numerical entities.
+	\end{enumerate}
+	\item{}OpenNLP Named Entity Recognition
+	\begin{enumerate}
+		\item{}\emph{Language Setter}: Sets the \cas{} language to English. 
+		\item{}\emph{OpenNLP Segmenter \cite{opennlp}}: Segments the text into tokens for further processing.
+		\item{}\emph{Mate Lemmatizer \cite{bohnet2010very}}: Generates the base forms for all identified tokens.
+		\item{}\emph{OpenNLP PoS Tagger \cite{opennlp}}: Finds the parts-of-speech for all identified tokens.
+		\item{}\emph{OpenNLP Named Entity Recognizer \cite{opennlp}}: Finds occurrences of entities according to a pre-defined model.
+
+	\end{enumerate}
 	
 \end{itemize}
+All the given analysis engines (except for the Language Setter) are provided by the \dkpro{} repository via the build tool maven. 
 
-\section{Computation Speed}
-
-Relativ kanonisch in byte per second. Sollten die Analysedaten hier etwas hergeben, bietet sich ne Tabelle mit Urdaten und entsprechend nen Diagramm oder 20 an. Sollten die Daten kaputt sein, können noch rudimentäre Zeitabstände aus den Logdateien gelesen werden. Wie sexy das ist, ist allerdings fraglich.
-
-\section{Extensibility}
+\subsection{Extensibility}
 
 Die extensibility ist hier zweiseitig zu betrachten, weil wir zum einen UIMA haben, was durch das Annotator-Plugin-System sehr extensible ist, was NLP-Funktionalität angeht. Das steht zumindest im Gegensatz zu v3NLP, was zwar auch Plugins zulässt, allerdings nicht die nativen UIMA-Dinger frisst (soweit ich weiß, muss ich noch bestätigen).
 
@@ -34,11 +86,11 @@ Zum anderen stellt sich die Frage inwiefern Spark-Konzepte weiter auf das Framew
 
 Interessant wäre vielleicht noch zu erwähnen, dass mein FW ein Serialization- und Compression- Interface anbietet, durch das der User diese beiden Aspekte quasi selbst einstellen kann. Beides macht einen großen Leistungsunterschied, besonders wenn man Network vs Localhost-Verkehr betrachtet. UIMA-AS bietet die Möglichkeit die Serialization selbst zu definieren, allerdings nicht die Compression. Der Serializer kann btw. natürlich auch dazu verwendet werden um Daten zu prunen. Das ist aber vom Anwendungsfall abhängig und hier nicht wirklich relevant, evtl sollte ich es allerdings trotzdem mal erwähnen.
 
-\section{Maintainability}
+\subsection{Maintainability}
 
 Im Gegensatz zu UIMA-AS punktet hier natürlich auch mein FW. Ich sag nur XML-Dateien.
 Mein FW (ich hab dem noch gar keinen Namen gegeben) setzt auf die Spark-Infrastruktur. Damit ist es genauso Maintainable wie dieses, was auch immer das heißen mag. Ich gehe davon aus, dass services wie AWS sowas übernehmen.
 
-\section{Scalability}
+\subsection{Scalability}
 
 Ein bisschen seltsam, das als Metrik hinzuzunehmen, aber trotzdem sollte man sich Gedanken darum machen, was passiert wenn wir ZU bigData haben. Bei UIMA-AS würde als erstes vermutlich der Broker streiken, weil es keinen Broker-Broker gibt. Bei Spark kann es mehrere Master in einem Netzwerk geben. Wie das geregelt wird, muss ich noch herausfinden.
