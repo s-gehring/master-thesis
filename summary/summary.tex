@@ -10,10 +10,12 @@ Das hängt ein wenig von den Ergebnissen ab. Ich hoffe auf sowas wie "Ich bin de
 
 
 \section{Availability}
+\label{sec:availability}
 From November 2018 on, the frameworks code will be publicized on GitHub\footnote{On \url{https://github.com/s-gehring/master-thesis-program}}. Since the framework is wrapped inside a maven project, it will also be uploaded to the central maven repository. Furthermore, another git repository that contains a working \spark{} dockerfile and the evaluation setup architecture will be published\footnote{On \url{https://github.com/s-gehring/master-thesis-spark}}. Next, the maven project that defines the benchmarking Java code will be available\footnote{On \url{https://github.com/s-gehring/master-thesis-benchmark}}. A hybrid project that consists of the deployment of \uimaas{} used in the evaluation and defines a dockerfile containing a working \uimaas{} installation will also be published on GitHub\footnote{On \url{https://github.com/s-gehring/master-thesis-uimaas}}. At last, this Thesis and the corresponding \LaTeX{} code will be available on GitHub as well \footnote{On \url{https://github.com/s-gehring/master-thesis}}.
 
 All repositories will be published under the MIT license and are therefore free to use.
 
 \section{Outlook}
+First, the framework and all evaluation related code and resources will be made public according to Section~\ref{sec:availability}. Other than that further improvements to the presented framework can still be made. The wrapping class \lstinline|AnalysisResult| only provides a subset of its underlying \lstinline|JavaRDD| functionality. The other functions were not needed at the time of writing and have therefore been neglected. However, an unwrapping of said \rdd{} may be desired, making further processing of the underlying \cas{} possible. In such a way, one could benefit substantially more from \spark{}s optimization features.
 
-Spark-Funktionalitäten können noch in das Framework implementiert werden (sogar extrem leicht, da der return value ein Spark-Objekt ist). Weiterhin ist es natürlich Usern überlassen ob weitere Serializations und Compressions implementiert werden.
+Furthermore, more compression algorithms may be implemented in the future, making compression for different serializations feasible. New serialization techniques, like delta \cas{} as used in \cite{epstein2012making} could also help improve the frameworks performance.
