@@ -1,0 +1,75 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'docker-architecture-uimaas.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{320.25bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.63934426)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{docker-architecture-uimaas.pdf}}%
+    \put(0.08542292,0.55687612){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}document-provider\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{docker-architecture-uimaas.pdf}}%
+    \put(0.75603776,0.06038893){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Broker\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{docker-architecture-uimaas.pdf}}%
+    \put(0.68811292,0.55687612){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}UIMA-AS Service\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{docker-architecture-uimaas.pdf}}%
+    \put(0.14244541,0.06038893){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Submitter\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{docker-architecture-uimaas.pdf}}%
+    \put(0.844244,0.48696835){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1..n\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{docker-architecture-uimaas.pdf}}%
+    \put(0.81296651,0.42041358){\rotatebox{-90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}distributes tasks\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{docker-architecture-uimaas.pdf}}%
+    \put(0.71935149,0.13029669){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{docker-architecture-uimaas.pdf}}%
+    \put(0.21811874,0.41984871){\rotatebox{-90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}read documents\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{docker-architecture-uimaas.pdf}}%
+    \put(0.43673399,0.08697124){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}send CAS\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
