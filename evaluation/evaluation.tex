@@ -43,10 +43,7 @@ First, the \uimaas{} services register themselves at the given broker instance. 
 
 In the same way as in Section~\ref{ssec:spark}, the submitter reads the documents per HTTP from the document-provider, which is an instance of the identical image used in the \spark{} evaluation. Notice that even the logic of reading the corpus is identical, since it is wrapped inside a \lstinline|CollectionReader|, which produces \cas{} object that can be processed further. The \cas{} are then sent to the broker and distributed among the services. An important distinction to make is, that in the \uimaas{} concept, the \cas{} object must return to the submitter. In contrast, the concept of the framework built on top of spark does allow the collection of the resulting \cas{}, but discourages it, since it may be a bottleneck on large corpora or large pipelines providing many analysis results.
 
-
-\section{Results}
-The evaluation setup given above was used to analyze a corpus of 3036 text files, taken from the larger dataset of the project Gutenberg\footurl{http://www.gutenberg.org/}{2018-09-16} \cite{lahiri:2014:SRW}. This subset was cleaned by metadata, license information and transcribers notes and were therefore seen as more realistic input data than books containing such artifacts. Furthermore books were chosen as analysis items, because they contain large amount of natural language and may revolve around very different domains. This can be important for the performance of algorithms that solve specific \nlp{} tasks, for example Named Entity Recognition.
-
+\subsection{Analysis Engines}
 Since the performance is most likely very dependent on the actual analysis to run, or more specifically the given pipeline, three different pipelines were used to compare \uimaas{} and \spark{}:
 \begin{itemize}
 	\item{}Parsing
@@ -72,25 +69,42 @@ Since the performance is most likely very dependent on the actual analysis to ru
 		\item{}\emph{Mate Lemmatizer \cite{bohnet2010very}}: Generates the base forms for all identified tokens.
 		\item{}\emph{OpenNLP PoS Tagger \cite{opennlp}}: Finds the parts-of-speech for all identified tokens.
 		\item{}\emph{OpenNLP Named Entity Recognizer \cite{opennlp}}: Finds occurrences of entities according to a pre-defined model.
-
+		
 	\end{enumerate}
 	
 \end{itemize}
 All the given analysis engines (except for the Language Setter) are provided by the \dkpro{} repository via the build tool maven. 
 
-\subsection{Extensibility}
 
-Die extensibility ist hier zweiseitig zu betrachten, weil wir zum einen UIMA haben, was durch das Annotator-Plugin-System sehr extensible ist, was NLP-Funktionalität angeht. Das steht zumindest im Gegensatz zu v3NLP, was zwar auch Plugins zulässt, allerdings nicht die nativen UIMA-Dinger frisst (soweit ich weiß, muss ich noch bestätigen).
+\section{Results}
+The evaluation setup given above was used to analyze a corpus of 3036 text files, taken from the larger dataset of the project Gutenberg\footurl{http://www.gutenberg.org/}{2018-09-16} \cite{lahiri:2014:SRW}. This subset was cleaned by metadata, license information and transcribers notes and were therefore seen as more realistic input data than books containing such artifacts. Furthermore books were chosen as analysis items, because they contain large amount of natural language and may revolve around very different domains. This can be important for the performance of algorithms that solve specific \nlp{} tasks, for example Named Entity Recognition. In the following sections the results of said evaluation are described.
 
-Zum anderen stellt sich die Frage inwiefern Spark-Konzepte weiter auf das Framework geworfen werden können. Es punktet zwar dadurch, dass es mit BigData umgehen kann, verliert allerdings durch das POJO, das der User zurückbekommt, an Spark-Funktionalität. Diese ist erweiterbar, allerdings nur wenn man den Quellcode selbst umschreibt (ie. das Projekt forked). Das ist zwar auch änderbar, ich will jetzt allerdings keien neuen features mehr zum FW hinzufügen, die nicht nur die Benchmarks invalidieren, sondern auch Fehler beinhalten können.
-
-Interessant wäre vielleicht noch zu erwähnen, dass mein FW ein Serialization- und Compression- Interface anbietet, durch das der User diese beiden Aspekte quasi selbst einstellen kann. Beides macht einen großen Leistungsunterschied, besonders wenn man Network vs Localhost-Verkehr betrachtet. UIMA-AS bietet die Möglichkeit die Serialization selbst zu definieren, allerdings nicht die Compression. Der Serializer kann btw. natürlich auch dazu verwendet werden um Daten zu prunen. Das ist aber vom Anwendungsfall abhängig und hier nicht wirklich relevant, evtl sollte ich es allerdings trotzdem mal erwähnen.
-
+\subsection{CPU Usage}
+TBD.
+\subsection{RAM Usage}
+TBD.
+\subsection{Document Throughput}
+TBD.
+\subsection{Byte Throughput}
+TBD.
 \subsection{Maintainability}
+Given an \anen{} which is used as a pipeline in a \spark{} cluster and an \uimaas{} service collection, changing the underlying Analysis Engine varies from each of the three evaluated approaches. A single threaded native \uima{} instance is exactly as complicated to change as the new Analysis Engine is easy to configure. Since each approach has to deal with this, it can be ignored while comparing all three implementations. This, however, leaves the single threaded approach to be trivial to reconfigure. This is what one can observe in real life applications and stems from the very generic interface the \lstinline|AnalysisEngine| class implements.
 
-Im Gegensatz zu UIMA-AS punktet hier natürlich auch mein FW. Ich sag nur XML-Dateien.
-Mein FW (ich hab dem noch gar keinen Namen gegeben) setzt auf die Spark-Infrastruktur. Damit ist es genauso Maintainable wie dieses, was auch immer das heißen mag. Ich gehe davon aus, dass services wie AWS sowas übernehmen.
+Changing \anens{} inside an \uimaas{} environment is substantially harder. Here, all services that serve the specific broker endpoint that is associated with the pipeline, must be shut down and redeployed. This can be automated with tools like \docker{}. This however, would also pose restrictions on log persistence and would add another layer of complexity to the deployment logic. Notice that, without extra tooling such as \docker{}, each service must be shut down separately. There is no centralized command interface.
 
-\subsection{Scalability}
+Switching \anens{} in a \spark{} environment is exactly as easy as the single threaded approach, since \spark{} is \uima{} agnostic. At the moment the \anen{} changes in the original JAR file, every new task \spark{} will pull the changed JAR file and therefore process the given \cas{} objects within the new \anen{} version. Notice that no changes on the cluster must be made and changing the underlying Analysis Engine is possible by only modifying the code in constant time in respect to the cluster size.
+\subsection{Implementability}
+Since each of the three evaluated implementations, utilizing \spark{}, \uimaas{} or just a single threaded native \uima{} pipeline requires knowledge about the \uima{} environment, the single threaded approach is objectively the easiest to implement. Taking sufficient knowledge of \uima{} as granted, the single threaded approach does not require any more expertise and is therefore trivial. This is not the case with \uimaas{} and the framework presented in Chapter~\ref{ch:implementation}.
 
-Ein bisschen seltsam, das als Metrik hinzuzunehmen, aber trotzdem sollte man sich Gedanken darum machen, was passiert wenn wir ZU bigData haben. Bei UIMA-AS würde als erstes vermutlich der Broker streiken, weil es keinen Broker-Broker gibt. Bei Spark kann es mehrere Master in einem Netzwerk geben. Wie das geregelt wird, muss ich noch herausfinden.
+\uimaas{} relies heavily on \xml{} files for deployment configuration, which most of must be edited manually. This is an error prone and tedious task when done by hand. The framework Leo, that builds on top of \uimaas{} helps with this by creating \xml{} descriptor files automatically. This however, requires the injection of the Leo framework, another dependency with possible errors and increasing the size of the distributed JAR file. Having dealt with \xml{} descriptor files and the distribution of those, other obstacles occur. Neither log files for debugging purposes nor configuration options of deployed pipeline services are available from outside the service. To make changes to a deployed pipeline, all instances of said \anen{} must be stopped and reinitialized. Log files must be collected by hand, a custom script or by a third party tool. This is opposed to the framework built on top of \spark{}.
+
+Although the framework needs knowledge about the configuration of a given \spark{} cluster, this is done once. While \uimaas{} server instances need to be redeployed whenever a new project starts or changes on \anens{} occur. A \spark{} cluster must be set up once and can then be used indefinitely for different projects and especially \anens{}. In an industry environment, a company wide \spark{} cluster would be imaginable. In such a scenario, configuration of the \spark{} cluster would be done once for the whole company. Thus having knowledge about \spark{} is only partially a requirement, depending on the surrounding environment. Having a running and configured instance of a \spark{} cluster at hand, the execution of the framework becomes trivial as well. Analysis Engines can be changed at will, since \spark{} is completely \uima{} agnostic. Log files are available by either configuring a proper log folder in the initial \spark{} options or by navigating to the \spark{} master node with any browser.
+\subsection{Code Quality}
+While strictly speaking not a metric measured in the evaluation, code quality is an important factor when deciding upon a scaling framework for \uima{}. Since the frameworks code was optimized according to both static code analyzers FindBugs and SonarLint, it seems unfair to compare their feedback on the framework presented in this thesis with their results on analyzing alternatives like \uimaas{} or Leo. However, it is still a good indicator of code robustness.
+
+While Leo was found to have 29 potential bugs according to FindBugs, and 626 bugs, vulnerabilities and code smells found by SonarLint, \uimaas{} results are way larger. With 3854 bad code artifacts identified by SonarLint and 42 potential bugs shown by FindBugs, its code robustness is debatable. This is especially important on larger projects in a setting where frequent updates are usually not possible, for example in a production environment.
+
+This metric has to be taken with care. As described above, the framework presented in Chapter~\ref{ch:implementation} was specifically designed to output as few finding of both static code analyzers as possible. Also, both analyzers were used with the default configuration, which is usually sensible. However, if one of both, Leo and \uimaas{} would have been programmed with a different set of FindBugs and SonarLint configuration options in mind, many false positives would be expected.
+
+Both, FindBugs and SonarLint do not find any potential bugs or vulnerabilities in the frameworks code. Also the Java compiler used for compiling the framework showed no warnings.
+
