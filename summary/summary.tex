@@ -2,11 +2,11 @@
 The following chapter concludes the thesis by summarizing its results and the frameworks limitations. Furthermore, an outlook on the frameworks source code availability and possible future changes will be given.
 
 \section{Limitations}
-Eventuell sogar schon in die Implementierung?
+TBD.
 
 \section{Conclusion}
 
-Das hängt ein wenig von den Ergebnissen ab. Ich hoffe auf sowas wie "Ich bin der tollste, UIMA-AS ist Dreck". Das spiegeln die Daten zwar nicht ganz wieder, aber hey :D
+TBD.
 
 
 \section{Availability}
@@ -19,3 +19,5 @@ All repositories will be published under the MIT license and are therefore free 
 First, the framework and all evaluation related code and resources will be made public according to Section~\ref{sec:availability}. Other than that further improvements to the presented framework can still be made. The wrapping class \lstinline|AnalysisResult| only provides a subset of its underlying \lstinline|JavaRDD| functionality. The other functions were not needed at the time of writing and have therefore been neglected. However, an unwrapping of said \rdd{} may be desired, making further processing of the underlying \cas{} possible. In such a way, one could benefit substantially more from \spark{}s optimization features.
 
 Furthermore, more compression algorithms may be implemented in the future, making compression for different serializations feasible. New serialization techniques, like delta \cas{} as used in \cite{epstein2012making} could also help improve the frameworks performance.
+
+Apache released \uima{} 3.0.0 on March 2018, which is supposed to be mostly backwards compatible to \uima{} 2.10.2, for which the framework was written. Although \uima{} 2.10.2 will still be supported and maintained, an upgrade to \uima{} 3.0.0 also seems like a possibility for improvement.
