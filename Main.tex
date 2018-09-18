@@ -110,7 +110,13 @@
 
 % Precontent
 \begin{abstract}
-	TDB.
+	In this thesis, we will introduce a new method of scaling \uima{} by distributing its workload to different machines inside a \spark{} cluster. \uima{}, being a general purpose \nlp{} framework, already ships with various methods of scaling. With one method being \uimacpe{}, an outdated framework and another being \uimaas{}, a newer, service-based idea, expecting the developer to many \xml{} files for every configuration detail of the deployment, a new approach seems necessary. 
+	
+	Given an instance of a \spark{} cluster, the framework presented in this thesis will be easy to implement and maintain. Simultaneously, it will pose almost no restrictions to the developer in terms of functionality of \uima{}. This especially includes the reusing of already established Analysis Engines, as for example contained in the large \dkpro{}.
+	
+	After introducing the framework itself and going into detail of its functionalities, we will evaluate it against \uimaas{}. For this, we will introduce metrics on how to measure the quality of either framework. We will also discuss maintainability and implementability of the framework and compare its code quality with the one of \uimaas{}.
+	
+	At the end we reach the conclusion that both approaches are Pareto efficient, having use cases for each of the framework where it excels the other.
 \end{abstract}
 
 % Content
