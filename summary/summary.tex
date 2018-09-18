@@ -2,20 +2,26 @@
 The following chapter concludes the thesis by summarizing its results and the frameworks limitations. Furthermore, an outlook on the frameworks source code availability and possible future changes will be given.
 
 \section{Limitations}
-TBD.
+The framework given in this thesis tries to not restrict any \uima{} related features. To achieve this in combination with thread-safety, each pipeline is separated into their own \jvm{}, guaranteeing maximal isolation. This however, can be unwanted, since analysis engines can no longer interact with each other by native Java \lstinline|Thread| logic or static variables. 
+
+The \lstinline|AnalysisResult| object, returned by the \spark{} cluster wraps around a \lstinline|JavaRDD| and delegates the logic to it. However, it restricts the user from directly accessing the \spark{} \api{} by setting the underlying \rdd{} to private. This is done to isolate the user from having to handle \spark{} related concepts, but prevents further processing inside the cluster before collecting the data first. The framework can easily be extended to provide such functionality though, as explained in Section~\ref{sec:outlook}. 
 
 \section{Conclusion}
+The evaluation shows, that the framework presented here does not simply replace \uimaas{} as a method of scaling \uima{}, but rather complements it. It performs generally worse on smaller input data, be it small documents or corpora with fewer documents inside or both. However, on large input sizes it seems to be at least competitive with \uimaas{}. 
 
-TBD.
+The fundamental part on why it should be used as opposed to \uimaas{} (or similarly Leo) is the way it is handled. Being configured once, a \spark{} cluster never needs to change in order to work with it. Companies or universities already owning a \spark{} cluster, do not need to configure it again for using it with the framework. This is different from \uimaas{}, whose Analysis Engines get deployed once and do exactly what they were designed to do. 
 
+All in all, the framework presented in this thesis should be preferred on large-scale single time uses, such as an analysis of a large historic corpus, while \uimaas{} performs better on online scenarios, never having the need to reinitialize any service again. Also development and performance testing of Analysis Engines should be done with the framework given in this thesis, since the deployment of new code is orders of magnitude simpler than deploying new services with \uimaas{}.
 
+Further evaluations with larger cluster of machines are required to find out if the trends seen in Chapter~\ref{ch:evaluation} also hold for industry sized \spark{} clusters. 
 \section{Availability}
 \label{sec:availability}
-From November 2018 on, the frameworks code will be publicized on GitHub\footnote{On \url{https://github.com/s-gehring/master-thesis-program}}. Since the framework is wrapped inside a maven project, it will also be uploaded to the central maven repository. Furthermore, another git repository that contains a working \spark{} dockerfile and the evaluation setup architecture will be published\footnote{On \url{https://github.com/s-gehring/master-thesis-spark}}. Next, the maven project that defines the benchmarking Java code will be available\footnote{On \url{https://github.com/s-gehring/master-thesis-benchmark}}. A hybrid project that consists of the deployment of \uimaas{} used in the evaluation and defines a dockerfile containing a working \uimaas{} installation will also be published on GitHub\footnote{On \url{https://github.com/s-gehring/master-thesis-uimaas}}. At last, this Thesis and the corresponding \LaTeX{} code will be available on GitHub as well \footnote{On \url{https://github.com/s-gehring/master-thesis}}.
+From November 2018 on, the frameworks code will be publicized on GitHub\footnote{On \url{https://github.com/s-gehring/master-thesis-program}}. Since the framework is wrapped inside a maven project, it will also be uploaded to the central maven repository. Furthermore, another git repository that contains a working \spark{} dockerfile and the evaluation setup architecture will be published\footnote{On \url{https://github.com/s-gehring/master-thesis-spark}}. Next, the maven project that defines the benchmarking Java code will be available\footnote{On \url{https://github.com/s-gehring/master-thesis-benchmark}}. A hybrid project that consists of the deployment of \uimaas{} used in the evaluation and defines a dockerfile containing a working \uimaas{} installation will also be published on GitHub\footnote{On \url{https://github.com/s-gehring/master-thesis-uimaas}}. 
 
 All repositories will be published under the MIT license and are therefore free to use.
 
 \section{Outlook}
+\label{sec:outlook}
 First, the framework and all evaluation related code and resources will be made public according to Section~\ref{sec:availability}. Other than that further improvements to the presented framework can still be made. The wrapping class \lstinline|AnalysisResult| only provides a subset of its underlying \lstinline|JavaRDD| functionality. The other functions were not needed at the time of writing and have therefore been neglected. However, an unwrapping of said \rdd{} may be desired, making further processing of the underlying \cas{} possible. In such a way, one could benefit substantially more from \spark{}s optimization features.
 
 Furthermore, more compression algorithms may be implemented in the future, making compression for different serializations feasible. New serialization techniques, like delta \cas{} as used in \cite{epstein2012making} could also help improve the frameworks performance.
