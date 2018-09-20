@@ -2,7 +2,7 @@
 The following chapter concludes the thesis by summarizing its results and the framework's limitations. Furthermore, an outlook on the framework's source code availability and possible future changes will be given.
 
 \section{Limitations}
-The framework given in this thesis tries to not restrict any \uima{} related features. To achieve this in combination with thread-safety, each pipeline is separated into their own \jvm{}, guaranteeing maximal isolation. This however, can be unwanted, since analysis engines can no longer interact with each other by native Java \lstinline|Thread| logic or static variables. 
+The framework given in this thesis tries to not restrict any \uima{} related features. To achieve this in combination with thread-safety, each pipeline is separated into their own \jvm{}, guaranteeing maximal isolation. This however, can be unwanted, since Analysis Engines can no longer interact with each other by native Java \lstinline|Thread| logic or static variables. 
 
 The \lstinline|AnalysisResult| object, returned by the \spark{} cluster wraps around a \lstinline|JavaRDD| and delegates the logic to it. However, it restricts the user from directly accessing the \spark{} \api{} by setting the underlying \rdd{} to private. This is done to isolate the user from having to handle \spark{} related concepts, but prevents further processing inside the cluster before collecting the data first. The framework can easily be extended to provide such functionality though, as explained in Section~\ref{sec:outlook}. 
 
